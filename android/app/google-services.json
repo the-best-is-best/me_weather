@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "547845405757",
+    "project_id": "demoapp-295814",
+    "storage_bucket": "demoapp-295814.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547845405757:android:c8ee88cb5019aa79233e54",
+        "android_client_info": {
+          "package_name": "com.michelleRaouf.meWeather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547845405757-gvtfa0hocuj6vh24bo2i7paldgksuarj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_2Vh5DVE0CbSnInnZYb0k_xBhPYdmCNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547845405757-gvtfa0hocuj6vh24bo2i7paldgksuarj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
