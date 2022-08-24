@@ -1,20 +1,16 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings
-
 import 'package:buildcondition/buildcondition.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_date.dart';
-import 'package:me_weather/app/extensions/extension_int.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
-import 'package:me_weather/app/resources/font_manager.dart';
 import 'package:me_weather/app/resources/styles_manger.dart';
 import 'package:me_weather/domain/models/weather_model.dart';
 import 'package:me_weather/presentation/components/loading_indicator.dart';
+import 'package:me_weather/presentation/home/widgets/weather_details.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:weather_icons/weather_icons.dart';
-
 import '../../../app/cubit/app_cubit.dart';
 import '../../../app/cubit/app_states.dart';
 import '../../components/my_text.dart';
@@ -66,106 +62,54 @@ class _BuildPageState extends State<BuildPage> {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: context.height,
+                                height: MitX.height,
                                 child: PageView.builder(
                                     onPageChanged: (value) {
                                       appCubit.changeCurrentCity(value);
                                     },
                                     itemBuilder: (context, index) {
-                                      WeatherModel weatherData =
+                                      WeatherModel currentWeather =
                                           appCubit.listWeather[index];
-                                      WeatherModel tommorowWeather = appCubit
-                                          .listForcastWeather[index]!
-                                          .firstWhere(
-                                        (element) => element.dateTime.isAfter(
-                                          element.dateTime
-                                              .add(Duration(hours: 3)),
-                                        ),
-                                      );
-
                                       return Column(
                                         children: [
                                           Center(
                                             child: MyText(
-                                                title: weatherData.dateTime
+                                                title: currentWeather.dateTime
                                                     .toTimeString()),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 50),
-                                            child: Column(children: [
-                                              MyText(
-                                                title: weatherData.temp
-                                                    .kelvinToCelsiusString(),
-                                                style: getBoldStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 100.sp),
-                                              ),
-                                              const SizedBox(height: 50),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  CachedImage(
-                                                      url: weatherData
-                                                          .iconImage),
-                                                  const SizedBox(width: 0),
-                                                  MyText(
-                                                    title:
-                                                        weatherData.description,
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                  const Spacer(),
-                                                  MyText(
-                                                    // ignore: unnecessary_string_interpolations
-                                                    title: '${weatherData.tempMax.kelvinToCelsiusString()}' +
-                                                        ' / ${weatherData.tempMin.kelvinToCelsiusString()}',
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  CachedNetworkImage(
-                                                    imageUrl:
-                                                        'http://openweathermap.org/img/w/10d.png',
-                                                    height: 50,
-                                                  ),
-                                                  const SizedBox(width: 0),
-                                                  MyText(
-                                                    title:
-                                                        weatherData.description,
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                  const Spacer(),
-                                                  MyText(
-                                                    // ignore: unnecessary_string_interpolations
-                                                    title: '${weatherData.tempMax.kelvinToCelsiusString()}' +
-                                                        ' / ${weatherData.tempMin.kelvinToCelsiusString()}',
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              SizedBox(
-                                                width: context.width * .90,
-                                                child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    child: const MyText(
-                                                      title: '4-day forecast',
-                                                    )),
-                                              ),
-                                            ]),
+                                          const SizedBox(
+                                            height: 10,
                                           ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              MyText(
+                                                  title:
+                                                      'Sunrise ${currentWeather.sunrise!.toTime()}'),
+                                              MyText(
+                                                  title:
+                                                      'sunset ${currentWeather.sunset!.toTime()}')
+                                            ],
+                                          ),
+                                          const SizedBox(height: 50),
+                                          MyText(
+                                            title: currentWeather.temp
+                                                .kelvinToCelsiusString(),
+                                            style: getBoldStyle(
+                                                color: Colors.white,
+                                                fontSize: 100.sp),
+                                          ),
+                                          WeatherDetails(appCubit: appCubit),
+                                          const SizedBox(height: 25),
+                                          ListViewForecastWeather(
+                                              appCubit: appCubit)
                                         ],
                                       );
                                     },
                                     controller: pageController,
                                     itemCount: appCubit.listWeather.length),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -178,21 +122,68 @@ class _BuildPageState extends State<BuildPage> {
   }
 }
 
-class CachedImage extends StatelessWidget {
-  const CachedImage({
+class ListViewForecastWeather extends StatelessWidget {
+  const ListViewForecastWeather({
     Key? key,
-    required this.url,
-    this.width = 50,
+    required this.appCubit,
   }) : super(key: key);
 
-  final String url;
-  final double width;
+  final AppCubit appCubit;
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      width: width,
+    return SizedBox(
+      height: 100,
+      child: ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: appCubit.listForcastWeather[appCubit.currentCity]!.length,
+        itemBuilder: (context, index) {
+          List<WeatherModel> weatherData =
+              appCubit.listForcastWeather[appCubit.currentCity]!;
+          return Column(
+            children: [
+              MyText(
+                  title: index == 0
+                      ? 'Now'
+                      : DateFormat('hh').format(weatherData[index].dateTime)),
+              const SizedBox(height: 5),
+              MyText(title: weatherData[index].temp.kelvinToCelsiusString()),
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                  Icon(
+                      weatherData[index].deg >= 0 && weatherData[index].deg < 25
+                          ? WeatherIcons.wind_deg_0
+                          : weatherData[index].deg >= 25 &&
+                                  weatherData[index].deg <= 75
+                              ? WeatherIcons.wind_deg_45
+                              : weatherData[index].deg > 75 &&
+                                      weatherData[index].deg <= 120
+                                  ? WeatherIcons.wind_deg_135
+                                  : weatherData[index].deg > 125 &&
+                                          weatherData[index].deg <= 165
+                                      ? WeatherIcons.wind_deg_180
+                                      : weatherData[index].deg > 165 &&
+                                              weatherData[index].deg <= 210
+                                          ? WeatherIcons.wind_deg_225
+                                          : weatherData[index].deg > 210 &&
+                                                  weatherData[index].deg <= 245
+                                              ? WeatherIcons.wind_deg_270
+                                              : WeatherIcons.wind_deg_315,
+                      size: 20),
+                  const SizedBox(width: 5),
+                  MyText(
+                    title:
+                        '${(weatherData[index].speed / 1000 * 60 * 60).round()} km/h',
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 15),
+      ),
     );
   }
 }

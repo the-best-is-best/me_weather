@@ -28,29 +28,34 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, widget) {
-          return MitXMaterialApp(
-            debugShowCheckedModeBanner: false,
-            fallbackLocale: const Locale('en'),
-            locale: MitX.deviceLocale,
-            initialRoute: '/',
-            translations: LangController(),
-            supportedLocales: const [
-              Locale('en', 'US'),
-              Locale('ar', 'EG'),
-            ],
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            onGenerateRoute: RoutesManager.getRoutes,
-            onUnknownRoute: (settings) {
-              return MaterialPageRoute(builder: (context) => const ErrorView());
-            },
-            title: 'Flutter Demo',
-            theme: LightTheme.getTheme,
-            darkTheme: ThemeData(
-              primarySwatch: Colors.red,
+          return BlocProvider(
+            create: (context) =>
+                AppCubit(di(), di(), di(), di(), di())..loadDataCites(),
+            child: MitXMaterialApp(
+              debugShowCheckedModeBanner: false,
+              fallbackLocale: const Locale('en'),
+              locale: MitX.deviceLocale,
+              initialRoute: '/',
+              translations: LangController(),
+              supportedLocales: const [
+                Locale('en', 'US'),
+                Locale('ar', 'EG'),
+              ],
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              onGenerateRoute: RoutesManager.getRoutes,
+              onUnknownRoute: (settings) {
+                return MaterialPageRoute(
+                    builder: (context) => const ErrorView());
+              },
+              title: 'Flutter Demo',
+              theme: LightTheme.getTheme,
+              darkTheme: ThemeData(
+                primarySwatch: Colors.red,
+              ),
             ),
           );
         });

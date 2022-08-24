@@ -16,7 +16,6 @@ import 'package:me_weather/domain/use_case/get_weather_by_country_name_use_case.
 import 'package:me_weather/domain/use_case/get_weather_data_by_location.dart';
 import 'package:me_weather/gen/assets.gen.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:me_weather/services/location_services.dart';
 import 'package:mit_x/mit_x.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -40,13 +39,48 @@ class AppCubit extends Cubit<AppStates> {
   static List<CityModel> citiesData = [];
 
   List<WeatherModel> listWeather = [];
+
+  List<WeatherModel> listThreeDayWeather = [];
+
   Map<int, List<WeatherModel>> listForcastWeather = {};
+
+  List<WeatherModel> listForcastByDaysWeather = [];
 
   int currentCity = 0;
 
   void changeCurrentCity(int index) {
     currentCity = index;
+    getListThreeDaysWeather();
     emit(AppChangeCountryState());
+  }
+
+  void getListThreeDaysWeather() {
+    listThreeDayWeather = [];
+    listForcastByDaysWeather = [];
+    int maxDays = 2;
+    listThreeDayWeather.add(listWeather[currentCity]);
+    listForcastByDaysWeather.add(listWeather[currentCity]);
+
+    for (int days = 1; days <= maxDays; days++) {
+      WeatherModel nextDayWeather = listForcastWeather[currentCity]!.firstWhere(
+          (element) =>
+              element.dateTime.day ==
+              listWeather[currentCity].dateTime.day + days);
+
+      listThreeDayWeather.add(nextDayWeather);
+    }
+    maxDays = 4;
+    // get Weather Three Days
+
+    for (int days = 1; days <= maxDays; days++) {
+      WeatherModel? nextDayWeather = listForcastWeather[currentCity]
+          ?.firstWhere((element) =>
+              element.dateTime.day ==
+                  listWeather[currentCity].dateTime.day + days &&
+              element.dateTime.hour >= listWeather[currentCity].dateTime.hour);
+
+      listForcastByDaysWeather.add(nextDayWeather!);
+    }
   }
 
   void loadDataCites() async {
@@ -118,6 +152,8 @@ class AppCubit extends Cubit<AppStates> {
             .loadString(const $AssetsJsonGen().newYorkForecast));
     listForcastWeather.addAll(
         {1: ForcastWeatherResponse.fromJson(newYorkWeatherForcast).toDomain()});
+    getListThreeDaysWeather();
+
     emit(AppLoadedDataState());
   }
 }
