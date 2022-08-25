@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, widget) {
           return BlocProvider(
-            create: (context) =>
+            create: (_) =>
                 AppCubit(di(), di(), di(), di(), di())..loadDataCites(),
             child: MitXMaterialApp(
               debugShowCheckedModeBanner: false,
