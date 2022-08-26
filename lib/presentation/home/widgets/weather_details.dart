@@ -43,8 +43,8 @@ class WeatherDetails extends StatelessWidget {
                       const Spacer(),
                       MyText(
                         // ignore: unnecessary_string_interpolations
-                        title: '${weatherData.tempMax.kelvinToCelsiusString()}' +
-                            ' / ${weatherData.tempMin.kelvinToCelsiusString()}',
+                        title:
+                            '${weatherData.tempMax.kelvinToCelsiusString()} / ${weatherData.tempMin.kelvinToCelsiusString()}',
                         style: getMediumStyle(),
                       ),
                     ],

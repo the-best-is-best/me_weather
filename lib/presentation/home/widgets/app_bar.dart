@@ -94,6 +94,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       child: MyTextField(
                         hintText: 'Search',
                         focusNode: focusNode,
+                        onChanged: (value) {
+                          appCubit.searchForCity(value.toLowerCase());
+                        },
                       ),
                     ),
                   ),

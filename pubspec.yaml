@@ -48,8 +48,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.6.0
   lottie: ^1.4.1
-  mit_x:
-    path: ../library/tbib_get
+  mit_x: ^0.0.3
   pretty_dio_logger: ^1.1.1
   retrofit: ^3.0.1+1
   smooth_page_indicator: ^1.0.0+2

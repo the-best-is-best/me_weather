@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:me_weather/app/cubit/app_states.dart';
+import 'package:me_weather/app/extensions/extension_num.dart';
 import 'package:me_weather/data/mapper/forcast_weather_response_mapper.dart';
 import 'package:me_weather/data/mapper/weather_response_mapper.dart';
 import 'package:me_weather/data/responses/forcast_weather_response.dart';
@@ -17,6 +19,8 @@ import 'package:me_weather/domain/use_case/get_weather_data_by_location.dart';
 import 'package:me_weather/gen/assets.gen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mit_x/mit_x.dart';
+
+import '../../services/location_services.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit(
@@ -48,13 +52,34 @@ class AppCubit extends Cubit<AppStates> {
 
   int currentCity = 0;
 
+// city
   void changeCurrentCity(int index) {
     currentCity = index;
-    getListThreeDaysWeather();
+    _getListForcastByDaysWeather();
     emit(AppChangeCountryState());
   }
 
-  void getListThreeDaysWeather() {
+  List<CityModel> searchCity = [];
+  void searchForCity(String city) {
+    emit(AppSearchCityState());
+    searchCity = [];
+
+    if (city.isEmpty) {
+      searchCity = [];
+      emit(AppSearchedCityState());
+      return;
+    }
+    searchCity = citiesData
+        .where((element) =>
+            element.city.toLowerCase().contains(city) ||
+            element.country.toLowerCase().contains(city))
+        .toList();
+
+    emit(AppSearchedCityState());
+  }
+
+// weather data
+  void _getListForcastByDaysWeather() {
     listThreeDayWeather = [];
     listForcastByDaysWeather = [];
     int maxDays = 2;
@@ -62,24 +87,26 @@ class AppCubit extends Cubit<AppStates> {
     listForcastByDaysWeather.add(listWeather[currentCity]);
 
     for (int days = 1; days <= maxDays; days++) {
-      WeatherModel nextDayWeather = listForcastWeather[currentCity]!.firstWhere(
-          (element) =>
-              element.dateTime.day ==
-              listWeather[currentCity].dateTime.day + days);
+      WeatherModel? nextDayWeather =
+          listForcastWeather[currentCity]!.firstWhereOrNull((element) {
+        return element.dateTime.day ==
+                listWeather[currentCity].dateTime.day + days &&
+            element.dateTime.hour == 11;
+      });
 
-      listThreeDayWeather.add(nextDayWeather);
+      if (nextDayWeather != null) listThreeDayWeather.add(nextDayWeather);
     }
     maxDays = 4;
     // get Weather Three Days
 
     for (int days = 1; days <= maxDays; days++) {
       WeatherModel? nextDayWeather = listForcastWeather[currentCity]
-          ?.firstWhere((element) =>
+          ?.firstWhereOrNull((element) =>
               element.dateTime.day ==
                   listWeather[currentCity].dateTime.day + days &&
-              element.dateTime.hour >= listWeather[currentCity].dateTime.hour);
+              element.dateTime.hour == 11);
 
-      listForcastByDaysWeather.add(nextDayWeather!);
+      if (nextDayWeather != null) listForcastByDaysWeather.add(nextDayWeather);
     }
   }
 
@@ -98,62 +125,62 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void getWeatherDataByYourLocation() async {
-    // emit(AppLoadDataState());
-    // if (listWeather.isEmpty) {
-    //   try {
-    //     Position yourPosition = await getGeoLocationPosition();
-    //     var response = await _weatherByLocationUseCase.execute(
-    //         GetWeatherDataByLocationUseCaseInput(
-    //             yourPosition.longitude.toString(),
-    //             yourPosition.latitude.toString()));
-    //     response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
-    //       listWeather.add(data);
-    //       var response1 = await _weatherForcastByLocationUseCase.execute(
-    //           GetFiveDaysThreeHoursForcastDataByLocationUseCaseInput(
-    //               yourPosition.longitude.toString(),
-    //               yourPosition.latitude.toString()));
-    //       response1.fold(
-    //         (error) => emit(
-    //           AppErrorState(error.messages),
-    //         ),
-    //         (data) {
-    //           listForcastWeather.addAll(data);
-    //           emit(AppLoadedDataState());
-    //         },
-    //       );
-    //     });
-    //   } catch (ex) {
-    //     emit(AppNeededLocationState());
-    //   }
-    // }
+    emit(AppLoadDataState());
+    if (listWeather.isEmpty) {
+      try {
+        Position yourPosition = await getGeoLocationPosition();
+        var response = await _weatherByLocationUseCase.execute(
+            GetWeatherDataByLocationUseCaseInput(
+                yourPosition.longitude.toString(),
+                yourPosition.latitude.toString()));
+        response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
+          listWeather.add(data);
+          var response1 = await _weatherForcastByLocationUseCase.execute(
+              GetFiveDaysThreeHoursForcastDataByLocationUseCaseInput(
+                  yourPosition.longitude.toString(),
+                  yourPosition.latitude.toString()));
+          response1.fold(
+            (error) => emit(
+              AppErrorState(error.messages),
+            ),
+            (data) {
+              listForcastWeather.addAll({listWeather.length - 1: data});
+              _getListForcastByDaysWeather();
+              emit(AppLoadedDataState());
+            },
+          );
+        });
+      } catch (ex) {
+        emit(AppNeededLocationState());
+      }
+    }
   }
 
-  void getWeatherDataByCounty() async {
-    // load from local data
+  void getWeatherDataByCounty(String country) async {
     emit(AppLoadDataState());
-    Map<String, dynamic> egyptWeather = json.decode(
-        await DefaultAssetBundle.of(MitX.context!)
-            .loadString(const $AssetsJsonGen().weatherEgypt));
-    listWeather.add(GetWeatherResponse.fromJson(egyptWeather).toDomain());
+    if (listWeather.isEmpty) {
+      try {
+        var response = await _weatherByCountryNameUseCase
+            .execute(GetWeatherByCountryNameUseCaseInput(country));
+        response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
+          listWeather.add(data);
+          var response1 = await _weatherForcastByCountryNameUseCase
+              .execute(GetForcastWeatherByCountryNameUseCaseInput(country));
+          response1.fold(
+            (error) => emit(
+              AppErrorState(error.messages),
+            ),
+            (data) {
+              listForcastWeather.addAll({listWeather.length - 1: data});
 
-    Map<String, dynamic> newYorkYWeather = json.decode(
-        await DefaultAssetBundle.of(MitX.context!)
-            .loadString(const $AssetsJsonGen().weatherNewYork));
-    listWeather.add(GetWeatherResponse.fromJson(newYorkYWeather).toDomain());
-
-    Map<String, dynamic> egyptWeatherForcast = json.decode(
-        await DefaultAssetBundle.of(MitX.context!)
-            .loadString(const $AssetsJsonGen().egyptForecast));
-    listForcastWeather.addAll(
-        {0: ForcastWeatherResponse.fromJson(egyptWeatherForcast).toDomain()});
-
-    Map<String, dynamic> newYorkWeatherForcast = json.decode(
-        await DefaultAssetBundle.of(MitX.context!)
-            .loadString(const $AssetsJsonGen().newYorkForecast));
-    listForcastWeather.addAll(
-        {1: ForcastWeatherResponse.fromJson(newYorkWeatherForcast).toDomain()});
-    getListThreeDaysWeather();
-
-    emit(AppLoadedDataState());
+              _getListForcastByDaysWeather();
+              emit(AppLoadedDataState());
+            },
+          );
+        });
+      } catch (ex) {
+        emit(AppErrorState(ex.toString()));
+      }
+    }
   }
 }

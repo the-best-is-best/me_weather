@@ -18,6 +18,6 @@ class GetForcastWeatherByCountryNameUseCase extends BaseCase<
 
 class GetForcastWeatherByCountryNameUseCaseInput {
   final String cityName;
-  final bool isSearch;
-  GetForcastWeatherByCountryNameUseCaseInput(this.cityName, this.isSearch);
+
+  GetForcastWeatherByCountryNameUseCaseInput(this.cityName);
 }

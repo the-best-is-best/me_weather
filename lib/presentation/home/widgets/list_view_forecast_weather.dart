@@ -30,7 +30,7 @@ class ListViewForecastWeather extends StatelessWidget {
             children: [
               MyText(
                   title:
-                      "${DateFormat('HH').format(weatherData[index].dateTime)} :00"),
+                      "${DateFormat('h a').format(weatherData[index].dateTime)} "),
               const SizedBox(height: 5),
               MyText(title: weatherData[index].temp.kelvinToCelsiusString()),
               const SizedBox(height: 5),

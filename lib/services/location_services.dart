@@ -29,15 +29,15 @@ Future<Position> getGeoLocationPosition() async {
     }
   }
 
-  if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately.
-    MitX.snackbar('Error',
-        'Location permissions are permanently denied, we cannot request permissions.',
-        duration: const Duration(seconds: 5),
-        snackPosition: SnackPosition.BOTTOM);
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
+  // if (permission == LocationPermission.deniedForever) {
+  //   // Permissions are denied forever, handle appropriately.
+  //   MitX.snackbar('Error',
+  //       'Location permissions are permanently denied, we cannot request permissions.',
+  //       duration: const Duration(seconds: 5),
+  //       snackPosition: SnackPosition.BOTTOM);
+  //   return Future.error(
+  //       'Location permissions are permanently denied, we cannot request permissions.');
+  // }
 
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.

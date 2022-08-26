@@ -19,3 +19,7 @@ class AppErrorState extends AppStates {
 class AppLoadedDataState extends AppStates {}
 
 class AppChangeCountryState extends AppStates {}
+
+class AppSearchCityState extends AppStates {}
+
+class AppSearchedCityState extends AppStates {}

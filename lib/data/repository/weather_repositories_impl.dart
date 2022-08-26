@@ -7,8 +7,8 @@ import '../data_src/remote_data_src.dart';
 import '../network/error_handler.dart';
 import '../network/failure.dart';
 import '../network/network_info.dart';
-import 'get_weather/get_current_weather_impl.dart';
 import 'get_weather/get_forcast_weather_impl.dart';
+import 'get_weather/get_current_weather_impl.dart';
 
 class RepositoryImpl extends Repository {
   final RemoteDataSrc _remoteDataSrc;

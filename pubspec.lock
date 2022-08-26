@@ -584,9 +584,9 @@ packages:
   mit_x:
     dependency: "direct main"
     description:
-      path: "../library/tbib_get"
-      relative: true
-    source: path
+      name: mit_x
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.3"
   nested:
     dependency: transitive

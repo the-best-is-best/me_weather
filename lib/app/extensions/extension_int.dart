@@ -8,8 +8,8 @@ extension ExtensionInt on int {
     CityModel cityData =
         AppCubit.citiesData.firstWhere((element) => element.city == city);
     final detroit = tz.getLocation(cityData.timezone);
-
-    Timestamp timestamp = Timestamp.fromMillisecondsSinceEpoch(this * 1000);
+    print(cityData.timezone);
+    Timestamp timestamp = Timestamp.fromMillisecondsSinceEpoch(this);
     // Location timeZone = tz.getLocation(location);
     var time = tz.TZDateTime.from(timestamp.toDate(), detroit);
 

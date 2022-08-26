@@ -1,21 +1,23 @@
 import 'package:dartz/dartz.dart';
-import 'package:me_weather/data/mapper/weather_response_mapper.dart';
-
+import 'package:me_weather/data/mapper/forcast_weather_response_mapper.dart';
 import '../../../domain/models/weather_model.dart';
 import '../../data_src/remote_data_src.dart';
 import '../../network/error_handler.dart';
 import '../../network/failure.dart';
 import '../../network/network_info.dart';
 
-Future<Either<Failure, WeatherModel>> getWeatherByCityNameImpl({
+Future<Either<Failure, List<WeatherModel>>> getForcastWeatherByCityNameImpl({
   required NetworkInfo networkInfo,
   required RemoteDataSrc remoteDataSrc,
   required String cityName,
 }) async {
   if (await networkInfo.isConnected) {
     try {
-      var response = await remoteDataSrc.getWeatherByCityName(cityName);
-      if (response.cod!.toInt() >= 200 && response.cod!.toInt() <= 299) {
+      var response =
+          await remoteDataSrc.getFiveDaysThreeHoursForcastData(cityName);
+
+      if (int.tryParse(response.cod ?? "500")! >= 200 &&
+          int.tryParse(response.cod ?? "500")! <= 299) {
         //success
         // return either right
         // return data
@@ -23,7 +25,9 @@ Future<Either<Failure, WeatherModel>> getWeatherByCityNameImpl({
       } else {
         // return either left
         // return error
-        return Left(Failure(response.cod!.toInt(), "Error server"));
+
+        return Left(
+            Failure(int.tryParse(response.cod ?? "500")!, "Error server"));
       }
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
