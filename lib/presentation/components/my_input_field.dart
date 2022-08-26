@@ -10,16 +10,19 @@ class MyTextField extends StatelessWidget {
     this.focusNode,
     this.onSubmitted,
     this.onChanged,
+    this.controller,
   }) : super(key: key);
   final TextStyle? style;
   final String? hintText;
   final FocusNode? focusNode;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       style: style ?? getRegularStyle(color: Colors.white),
       decoration: InputDecoration(
           hintStyle: style ?? getRegularStyle(color: Colors.white),

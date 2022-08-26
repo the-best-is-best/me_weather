@@ -85,25 +85,53 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   ],
                 );
               },
-              fallback: (context) {
-                return SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 15),
-                    child: Center(
-                      child: MyTextField(
-                        hintText: 'Search',
-                        focusNode: focusNode,
-                        onChanged: (value) {
-                          appCubit.searchForCity(value.toLowerCase());
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
+              fallback: (context) =>
+                  SearchWidget(focusNode: focusNode, appCubit: appCubit),
             );
           });
     });
+  }
+}
+
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({
+    Key? key,
+    required this.focusNode,
+    required this.appCubit,
+  }) : super(key: key);
+
+  final FocusNode focusNode;
+  final AppCubit appCubit;
+
+  @override
+  State<SearchWidget> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  final TextEditingController controller = TextEditingController();
+  @override
+  void initState() {
+    AppCubit appCubit = AppCubit.get(context);
+    controller.text = appCubit.searchTextController;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+        child: Center(
+          child: MyTextField(
+            controller: controller,
+            hintText: 'Search',
+            focusNode: widget.focusNode,
+            onChanged: (value) {
+              widget.appCubit.searchForCity(value.toLowerCase());
+            },
+          ),
+        ),
+      ),
+    );
   }
 }

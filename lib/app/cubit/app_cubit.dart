@@ -3,13 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:me_weather/app/cubit/app_states.dart';
-import 'package:me_weather/app/extensions/extension_num.dart';
-import 'package:me_weather/data/mapper/forcast_weather_response_mapper.dart';
-import 'package:me_weather/data/mapper/weather_response_mapper.dart';
-import 'package:me_weather/data/responses/forcast_weather_response.dart';
-import 'package:me_weather/data/responses/get_weather_response.dart';
 import 'package:me_weather/domain/models/city_model.dart';
 import 'package:me_weather/domain/models/weather_model.dart';
 import 'package:me_weather/domain/use_case/get_five_days_three_hours_forcast_data_by_location.dart';
@@ -59,11 +53,12 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeCountryState());
   }
 
+  String searchTextController = "";
   List<CityModel> searchCity = [];
   void searchForCity(String city) {
     emit(AppSearchCityState());
     searchCity = [];
-
+    searchTextController = city;
     if (city.isEmpty) {
       searchCity = [];
       emit(AppSearchedCityState());
