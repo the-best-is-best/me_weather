@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,7 +12,6 @@ import 'package:me_weather/domain/use_case/get_weather_data_by_location.dart';
 import 'package:me_weather/gen/assets.gen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mit_x/mit_x.dart';
-
 import '../../services/location_services.dart';
 
 class AppCubit extends Cubit<AppStates> {

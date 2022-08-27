@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_weather/app/cubit/app_states.dart';
 import 'package:me_weather/app/resources/styles_manger.dart';
 import 'package:me_weather/presentation/components/my_text.dart';
+import 'package:mit_x/mit_x.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../app/cubit/app_cubit.dart';
 import '../../components/my_input_field.dart';
@@ -75,7 +76,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: () {},
+                    onPressed: () {
+                      MitX.openDrawer();
+                    },
                   ),
                   actions: [
                     IconButton(

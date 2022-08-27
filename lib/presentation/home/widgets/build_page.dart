@@ -44,6 +44,8 @@ class _BuildPageState extends State<BuildPage> {
       AppCubit appCubit = AppCubit.get(context);
 
       return Scaffold(
+        key: MitX.scaffoldKey,
+        drawer: Drawer(),
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(80),
             child: HomeAppBar(
