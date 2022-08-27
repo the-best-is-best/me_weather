@@ -63,9 +63,7 @@ class AppCubit extends Cubit<AppStates> {
       return;
     }
     searchCity = citiesData
-        .where((element) =>
-            element.city.toLowerCase().contains(city) ||
-            element.country.toLowerCase().contains(city))
+        .where((element) => element.city.toLowerCase().contains(city))
         .toList();
 
     emit(AppSearchedCityState());
@@ -109,7 +107,7 @@ class AppCubit extends Cubit<AppStates> {
 
       List<dynamic> cityMapJson = json.decode(
           await DefaultAssetBundle.of(MitX.context!)
-              .loadString(const $AssetsJsonGen().cityMap));
+              .loadString('assets/json/en/city_map.json'));
       for (var city in cityMapJson) {
         citiesData.add(CityModel.fromJson(city));
       }
