@@ -11,6 +11,7 @@ class MyTextField extends StatelessWidget {
     this.onSubmitted,
     this.onChanged,
     this.controller,
+    this.onTap,
   }) : super(key: key);
   final TextStyle? style;
   final String? hintText;
@@ -18,6 +19,7 @@ class MyTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final TextEditingController? controller;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class MyTextField extends StatelessWidget {
       focusNode: focusNode,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
+      onTap: onTap,
     );
   }
 }

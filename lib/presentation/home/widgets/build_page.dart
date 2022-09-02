@@ -9,6 +9,8 @@ import 'package:me_weather/app/resources/font_manager.dart';
 import 'package:me_weather/app/resources/styles_manger.dart';
 import 'package:me_weather/domain/models/weather_model.dart';
 import 'package:me_weather/presentation/components/loading_indicator.dart';
+import 'package:me_weather/presentation/components/my_input_field.dart';
+import 'package:me_weather/presentation/search/view/search_view.dart';
 import 'package:me_weather/presentation/home/widgets/weather_details.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:weather_icons/weather_icons.dart';
@@ -45,7 +47,7 @@ class _BuildPageState extends State<BuildPage> {
 
       return Scaffold(
         key: MitX.scaffoldKey,
-        drawer: Drawer(),
+        drawer: const MyDrawer(),
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(80),
             child: HomeAppBar(
@@ -260,5 +262,146 @@ class _BuildPageState extends State<BuildPage> {
         ),
       );
     });
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.blue[300],
+      child: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MyText(
+              title: 'Manage cities',
+              style: getMediumStyle(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          BlocBuilder<AppCubit, AppStates>(builder: (context, state) {
+            final AppCubit appCubit = AppCubit.get(context);
+            return Column(
+              children: [
+                SearchWidget(appCubit: appCubit),
+                const SizedBox(height: 15),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: appCubit.listWeather.length,
+                  itemBuilder: (context, index) {
+                    WeatherModel weatherData = appCubit.listWeather[index];
+                    return Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) =>
+                          appCubit.deleteWeather(weatherData.cityName),
+                      child: CardSearch(weatherData: weatherData),
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 15),
+                ),
+              ],
+            );
+          })
+        ]),
+      ),
+    );
+  }
+}
+
+class CardSearch extends StatelessWidget {
+  const CardSearch({
+    Key? key,
+    required this.weatherData,
+  }) : super(key: key);
+
+  final WeatherModel weatherData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        child: SizedBox(
+          width: context.width * .7,
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyText(
+                  title: weatherData.cityName,
+                  style: getMediumStyle(),
+                ),
+                MyText(
+                  title: weatherData.temp.kelvinToCelsiusString(),
+                  style: getBoldStyle(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    MyText(
+                      title: weatherData.tempMin.kelvinToCelsiusString(),
+                      style: getLightStyle(),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    child: MyText(title: '/'),
+                  ),
+                ),
+                Column(
+                  children: [
+                    MyText(
+                      title: weatherData.tempMax.kelvinToCelsiusString(),
+                      style: getLightStyle(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({
+    Key? key,
+    required this.appCubit,
+  }) : super(key: key);
+
+  final AppCubit appCubit;
+
+  @override
+  State<SearchWidget> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+      child: Center(
+        child: MyTextField(
+          hintText: 'Search',
+          onTap: () {
+            MitX.to(const SearchView());
+          },
+        ),
+      ),
+    );
   }
 }

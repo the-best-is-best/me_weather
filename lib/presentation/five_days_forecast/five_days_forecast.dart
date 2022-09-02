@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:me_weather/app/cubit/app_cubit.dart';
 import 'package:me_weather/app/cubit/app_states.dart';
-import 'package:me_weather/app/extensions/extension_date.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
 import 'package:me_weather/app/resources/font_manager.dart';
 import 'package:me_weather/app/resources/styles_manger.dart';

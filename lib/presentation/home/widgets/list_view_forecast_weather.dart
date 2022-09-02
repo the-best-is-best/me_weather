@@ -22,7 +22,8 @@ class ListViewForecastWeather extends StatelessWidget {
       child: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: appCubit.listForcastWeather[appCubit.currentCity]!.length,
+        itemCount:
+            appCubit.listForcastWeather[appCubit.currentCity]?.length ?? 0,
         itemBuilder: (context, index) {
           List<WeatherModel> weatherData =
               appCubit.listForcastWeather[appCubit.currentCity]!;

@@ -53,9 +53,6 @@ class _MyAppState extends State<MyApp> {
               },
               title: 'Flutter Demo',
               theme: LightTheme.getTheme,
-              darkTheme: ThemeData(
-                primarySwatch: Colors.red,
-              ),
             ),
           );
         });

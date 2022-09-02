@@ -34,6 +34,8 @@ class AppCubit extends Cubit<AppStates> {
 
   static List<CityModel> citiesData = [];
 
+  List<String> citiesUser = [];
+
   List<WeatherModel> listWeather = [];
 
   List<WeatherModel> listThreeDayWeather = [];
@@ -76,10 +78,11 @@ class AppCubit extends Cubit<AppStates> {
     int maxDays = 2;
     listThreeDayWeather.add(listWeather[currentCity]);
     listForcastByDaysWeather.add(listWeather[currentCity]);
-
+    print(
+        "important ${listForcastWeather[currentCity]?[currentCity].dateTime}");
     for (int days = 1; days <= maxDays; days++) {
       WeatherModel? nextDayWeather =
-          listForcastWeather[currentCity]!.firstWhereOrNull((element) {
+          listForcastWeather[currentCity]?.firstWhereOrNull((element) {
         return element.dateTime.day ==
                 listWeather[currentCity].dateTime.day + days &&
             element.dateTime.hour == 11;
@@ -99,6 +102,18 @@ class AppCubit extends Cubit<AppStates> {
 
       if (nextDayWeather != null) listForcastByDaysWeather.add(nextDayWeather);
     }
+    searchTextController = "";
+    searchCity = [];
+  }
+
+  void addMoreCites(String city) async {
+    back();
+    back();
+    getWeatherDataByCounty(city);
+  }
+
+  void back() {
+    MitX.back();
   }
 
   void loadDataCites() async {
@@ -112,10 +127,22 @@ class AppCubit extends Cubit<AppStates> {
         citiesData.add(CityModel.fromJson(city));
       }
     }
+    if (box.read('citiesUser') != null) {
+      String citiesUserJson = box.read('citiesUser');
+      List<dynamic> userCitiesList = jsonDecode(citiesUserJson);
+      for (var e in userCitiesList) {
+        citiesUser.add(e);
+
+        await getWeatherDataByCounty(e, byCityUser: true);
+      }
+    }
     emit(AppLoadedState());
   }
 
   void getWeatherDataByYourLocation() async {
+    if (citiesUser.isNotEmpty) {
+      return;
+    }
     emit(AppLoadDataState());
     if (listWeather.isEmpty) {
       try {
@@ -126,6 +153,8 @@ class AppCubit extends Cubit<AppStates> {
                 yourPosition.latitude.toString()));
         response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
           listWeather.add(data);
+          citiesUser.add(data.cityName);
+
           var response1 = await _weatherForcastByLocationUseCase.execute(
               GetFiveDaysThreeHoursForcastDataByLocationUseCaseInput(
                   yourPosition.longitude.toString(),
@@ -136,6 +165,7 @@ class AppCubit extends Cubit<AppStates> {
             ),
             (data) {
               listForcastWeather.addAll({listWeather.length - 1: data});
+
               _getListForcastByDaysWeather();
               emit(AppLoadedDataState());
             },
@@ -145,33 +175,61 @@ class AppCubit extends Cubit<AppStates> {
         emit(AppNeededLocationState());
       }
     }
+    box.write('citiesUser', jsonEncode(citiesUser));
   }
 
-  void getWeatherDataByCounty(String country) async {
+  Future getWeatherDataByCounty(String country,
+      {bool byCityUser = false}) async {
     emit(AppLoadDataState());
-    if (listWeather.isEmpty) {
-      try {
-        var response = await _weatherByCountryNameUseCase
-            .execute(GetWeatherByCountryNameUseCaseInput(country));
-        response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
-          listWeather.add(data);
-          var response1 = await _weatherForcastByCountryNameUseCase
-              .execute(GetForcastWeatherByCountryNameUseCaseInput(country));
-          response1.fold(
-            (error) => emit(
-              AppErrorState(error.messages),
-            ),
-            (data) {
-              listForcastWeather.addAll({listWeather.length - 1: data});
 
-              _getListForcastByDaysWeather();
-              emit(AppLoadedDataState());
-            },
-          );
-        });
-      } catch (ex) {
-        emit(AppErrorState(ex.toString()));
-      }
+    try {
+      var response = await _weatherByCountryNameUseCase
+          .execute(GetWeatherByCountryNameUseCaseInput(country));
+      response.fold((err) => emit(AppErrorState(err.messages)), (data) async {
+        listWeather.add(data);
+        if (!byCityUser) {
+          citiesUser.add(data.cityName);
+        }
+        var response1 = await _weatherForcastByCountryNameUseCase
+            .execute(GetForcastWeatherByCountryNameUseCaseInput(country));
+        response1.fold(
+          (error) => emit(
+            AppErrorState(error.messages),
+          ),
+          (data) {
+            listForcastWeather.addAll({listWeather.length - 1: data});
+            _getListForcastByDaysWeather();
+            emit(AppLoadedDataState());
+          },
+        );
+      });
+      box.write('citiesUser', jsonEncode(citiesUser));
+    } catch (ex) {
+      emit(AppErrorState(ex.toString()));
     }
+  }
+
+  void deleteWeather(String country) {
+    emit(AppLoadDataState());
+    citiesUser.remove(country);
+    listWeather.removeWhere((element) => element.cityName == country);
+    listForcastByDaysWeather
+        .removeWhere((element) => element.cityName == country);
+    listForcastWeather.forEach((key, value) =>
+        value.removeWhere((element) => element.cityName == country));
+    listThreeDayWeather.removeWhere((element) => element.cityName == country);
+    if (citiesUser.isNotEmpty) {
+      box.write('citiesUser', jsonEncode(citiesUser));
+
+      emit(AppLoadedDataState());
+
+      return;
+    }
+    for (var e in citiesUser) {
+      getWeatherDataByCounty(e, byCityUser: true);
+    }
+    box.write('citiesUser', jsonEncode(citiesUser));
+
+    emit(AppLoadedDataState());
   }
 }
