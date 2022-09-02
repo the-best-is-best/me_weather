@@ -20,8 +20,8 @@ extension HomeResponseMapper on ForcastWeatherResponse? {
           tempMin: item.main?.tempMin?.orEmpty() ?? 0,
           tempMax: item.main?.tempMax?.orEmpty() ?? 0,
           humidity: item.main?.humidity.orEmpty() ?? 0,
-          speed: item.wind?.speed.orEmpty() ?? 0,
-          deg: item.wind?.deg.orEmpty() ?? 0,
+          windSpeed: item.wind?.speed.orEmpty() ?? 0,
+          windDeg: item.wind?.deg.orEmpty() ?? 0,
           dateTime: item.dateTime!.toDateTime(this!.city!.name!),
           iconImage:
               "http://openweathermap.org/img/w/${item.weather![0].icon}.png",

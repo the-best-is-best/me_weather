@@ -20,20 +20,14 @@ class $AssetsImagesGen {
 class $AssetsJsonGen {
   const $AssetsJsonGen();
 
-  /// File path: assets/json/city_map.json
-  String get cityMap => 'assets/json/city_map.json';
+  $AssetsJsonEnGen get en => const $AssetsJsonEnGen();
+}
 
-  /// File path: assets/json/egypt_forecast.json
-  String get egyptForecast => 'assets/json/egypt_forecast.json';
+class $AssetsJsonEnGen {
+  const $AssetsJsonEnGen();
 
-  /// File path: assets/json/new_york_forecast.json
-  String get newYorkForecast => 'assets/json/new_york_forecast.json';
-
-  /// File path: assets/json/weather_egypt.json
-  String get weatherEgypt => 'assets/json/weather_egypt.json';
-
-  /// File path: assets/json/weather_new_york.json
-  String get weatherNewYork => 'assets/json/weather_new_york.json';
+  /// File path: assets/json/en/city_map.json
+  String get cityMap => 'assets/json/en/city_map.json';
 }
 
 class Assets {

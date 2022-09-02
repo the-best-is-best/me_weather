@@ -6,11 +6,16 @@ part 'forcast_weather_response.g.dart';
 @JsonSerializable()
 class ForcastWeatherResponse {
   final String? cod;
+  // final String? message;
   @JsonKey(name: "list")
   final List<WeatherDataResponse>? forcastWeather;
   final City? city;
 
-  ForcastWeatherResponse(this.forcastWeather, this.cod, this.city);
+  ForcastWeatherResponse(
+    this.forcastWeather,
+    this.cod,
+    this.city,
+  );
   factory ForcastWeatherResponse.fromJson(Map<String, dynamic> json) =>
       _$ForcastWeatherResponseFromJson(json);
 }

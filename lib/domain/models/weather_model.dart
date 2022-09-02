@@ -10,8 +10,8 @@ class WeatherModel {
   final num feelsLike;
   final num pressure;
   final num humidity;
-  final num speed;
-  final num deg;
+  final num windSpeed;
+  final num windDeg;
   final DateTime dateTime;
   final DateTime? sunrise;
   final DateTime? sunset;
@@ -26,8 +26,8 @@ class WeatherModel {
     required this.feelsLike,
     required this.pressure,
     required this.humidity,
-    required this.speed,
-    required this.deg,
+    required this.windSpeed,
+    required this.windDeg,
     required this.dateTime,
     required this.iconImage,
     required this.sunrise,

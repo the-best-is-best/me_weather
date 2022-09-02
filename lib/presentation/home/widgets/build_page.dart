@@ -1,24 +1,24 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings
-
 import 'package:buildcondition/buildcondition.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_date.dart';
-import 'package:me_weather/app/extensions/extension_int.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
 import 'package:me_weather/app/resources/font_manager.dart';
 import 'package:me_weather/app/resources/styles_manger.dart';
 import 'package:me_weather/domain/models/weather_model.dart';
 import 'package:me_weather/presentation/components/loading_indicator.dart';
+import 'package:me_weather/presentation/components/my_input_field.dart';
+import 'package:me_weather/presentation/search/view/search_view.dart';
+import 'package:me_weather/presentation/home/widgets/weather_details.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:weather_icons/weather_icons.dart';
-
 import '../../../app/cubit/app_cubit.dart';
 import '../../../app/cubit/app_states.dart';
 import '../../components/my_text.dart';
 import 'app_bar.dart';
+import 'list_view_forecast_weather.dart';
 
 class BuildPage extends StatefulWidget {
   const BuildPage({
@@ -36,7 +36,7 @@ class _BuildPageState extends State<BuildPage> {
   void initState() {
     AppCubit appCubit = AppCubit.get(context);
     appCubit.getWeatherDataByYourLocation();
-    appCubit.getWeatherDataByCounty();
+    //appCubit.getWeatherDataByCounty();
     super.initState();
   }
 
@@ -46,153 +46,362 @@ class _BuildPageState extends State<BuildPage> {
       AppCubit appCubit = AppCubit.get(context);
 
       return Scaffold(
+        key: MitX.scaffoldKey,
+        drawer: const MyDrawer(),
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(80),
             child: HomeAppBar(
               pageController: pageController,
             )),
         body: BuildCondition(
-            condition:
-                AppCubit.citiesData.isNotEmpty || state is! AppLoadedState,
-            builder: (context) {
-              return Builder(builder: (context) {
-                return BuildCondition(
-                    condition: state is! AppLoadDataState,
-                    fallback: (context) => const LoadingIndicator(),
-                    builder: (context) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: SingleChildScrollView(
+          condition: AppCubit.citiesData.isNotEmpty || state is! AppLoadedState,
+          builder: (context) {
+            return Builder(builder: (context) {
+              return BuildCondition(
+                  condition: state is! AppLoadDataState,
+                  fallback: (context) => const LoadingIndicator(),
+                  builder: (context) {
+                    return BuildCondition(
+                      condition: appCubit.listWeather.isNotEmpty,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: context.height,
+                              Expanded(
                                 child: PageView.builder(
                                     onPageChanged: (value) {
                                       appCubit.changeCurrentCity(value);
                                     },
                                     itemBuilder: (context, index) {
-                                      WeatherModel weatherData =
+                                      WeatherModel currentWeather =
                                           appCubit.listWeather[index];
-                                      WeatherModel tommorowWeather = appCubit
-                                          .listForcastWeather[index]!
-                                          .firstWhere(
-                                        (element) => element.dateTime.isAfter(
-                                          element.dateTime
-                                              .add(Duration(hours: 3)),
+                                      return SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Center(
+                                              child: MyText(
+                                                  title: currentWeather.dateTime
+                                                      .toTimeString()),
+                                            ),
+                                            const SizedBox(height: 50),
+                                            MyText(
+                                              title: currentWeather.temp
+                                                  .kelvinToCelsiusString(),
+                                              style: getBoldStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 100.sp),
+                                            ),
+                                            WeatherDetails(appCubit: appCubit),
+                                            const SizedBox(height: 25),
+                                            ListViewForecastWeather(
+                                                appCubit: appCubit),
+                                            const SizedBox(height: 25),
+                                            Builder(builder: (context) {
+                                              WeatherModel weatherData =
+                                                  appCubit.listWeather[
+                                                      appCubit.currentCity];
+                                              return Card(
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 15),
+                                                  child: Column(children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        MyText(
+                                                            title:
+                                                                'Sunrise ${weatherData.sunrise!.toTime()}'),
+                                                        MyText(
+                                                            title:
+                                                                'Sunset ${weatherData.sunset!.toTime()}'),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(height: 20),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          children: [
+                                                            const MyText(
+                                                                title:
+                                                                    'Real Feel'),
+                                                            const SizedBox(
+                                                                height: 5),
+                                                            MyText(
+                                                              title: weatherData
+                                                                  .feelsLike
+                                                                  .kelvinToCelsiusString(),
+                                                              style:
+                                                                  getMediumStyle(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        Column(
+                                                          children: [
+                                                            const MyText(
+                                                                title:
+                                                                    'Humidity'),
+                                                            const SizedBox(
+                                                                height: 5),
+                                                            MyText(
+                                                              title:
+                                                                  '${weatherData.humidity} %',
+                                                              style:
+                                                                  getMediumStyle(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(height: 20),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          children: [
+                                                            const MyText(
+                                                                title:
+                                                                    'Wind Speed'),
+                                                            const SizedBox(
+                                                                height: 5),
+                                                            MyText(
+                                                              title: weatherData
+                                                                  .windSpeed
+                                                                  .msToKM(),
+                                                              style:
+                                                                  getMediumStyle(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        Column(
+                                                          children: [
+                                                            const MyText(
+                                                                title:
+                                                                    'Pressure'),
+                                                            const SizedBox(
+                                                                height: 5),
+                                                            MyText(
+                                                              title:
+                                                                  '${weatherData.pressure} mbar',
+                                                              style:
+                                                                  getMediumStyle(),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(height: 10)
+                                                  ]),
+                                                ),
+                                              );
+                                            }),
+                                            const SizedBox(height: 10)
+                                          ],
                                         ),
-                                      );
-
-                                      return Column(
-                                        children: [
-                                          Center(
-                                            child: MyText(
-                                                title: weatherData.dateTime
-                                                    .toTimeString()),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 50),
-                                            child: Column(children: [
-                                              MyText(
-                                                title: weatherData.temp
-                                                    .kelvinToCelsiusString(),
-                                                style: getBoldStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 100.sp),
-                                              ),
-                                              const SizedBox(height: 50),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  CachedImage(
-                                                      url: weatherData
-                                                          .iconImage),
-                                                  const SizedBox(width: 0),
-                                                  MyText(
-                                                    title:
-                                                        weatherData.description,
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                  const Spacer(),
-                                                  MyText(
-                                                    // ignore: unnecessary_string_interpolations
-                                                    title: '${weatherData.tempMax.kelvinToCelsiusString()}' +
-                                                        ' / ${weatherData.tempMin.kelvinToCelsiusString()}',
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  CachedNetworkImage(
-                                                    imageUrl:
-                                                        'http://openweathermap.org/img/w/10d.png',
-                                                    height: 50,
-                                                  ),
-                                                  const SizedBox(width: 0),
-                                                  MyText(
-                                                    title:
-                                                        weatherData.description,
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                  const Spacer(),
-                                                  MyText(
-                                                    // ignore: unnecessary_string_interpolations
-                                                    title: '${weatherData.tempMax.kelvinToCelsiusString()}' +
-                                                        ' / ${weatherData.tempMin.kelvinToCelsiusString()}',
-                                                    style: getMediumStyle(),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              SizedBox(
-                                                width: context.width * .90,
-                                                child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    child: const MyText(
-                                                      title: '4-day forecast',
-                                                    )),
-                                              ),
-                                            ]),
-                                          ),
-                                        ],
                                       );
                                     },
                                     controller: pageController,
                                     itemCount: appCubit.listWeather.length),
-                              )
+                              ),
                             ],
                           ),
-                        ),
-                      );
-                    });
-              });
-            }),
+                        );
+                      },
+                      fallback: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12.0, horizontal: 15),
+                          child: ListView.separated(
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                appCubit.getWeatherDataByCounty(
+                                    appCubit.searchCity[index].city);
+                              },
+                              child: SizedBox(
+                                width: context.width,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText(
+                                      title: appCubit.searchCity[index].city,
+                                      style: getMediumStyle(
+                                          fontSize: FontSize.s30),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    MyText(
+                                        title:
+                                            appCubit.searchCity[index].timezone,
+                                        style: getRegularStyle()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 10),
+                            itemCount: appCubit.searchCity.length,
+                          ),
+                        );
+                      },
+                    );
+                  });
+            });
+          },
+        ),
       );
     });
   }
 }
 
-class CachedImage extends StatelessWidget {
-  const CachedImage({
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({
     Key? key,
-    required this.url,
-    this.width = 50,
   }) : super(key: key);
-
-  final String url;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      width: width,
+    return Drawer(
+      backgroundColor: Colors.blue[300],
+      child: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MyText(
+              title: 'Manage cities',
+              style: getMediumStyle(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          BlocBuilder<AppCubit, AppStates>(builder: (context, state) {
+            final AppCubit appCubit = AppCubit.get(context);
+            return Column(
+              children: [
+                SearchWidget(appCubit: appCubit),
+                const SizedBox(height: 15),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: appCubit.listWeather.length,
+                  itemBuilder: (context, index) {
+                    WeatherModel weatherData = appCubit.listWeather[index];
+                    return Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) =>
+                          appCubit.deleteWeather(weatherData.cityName),
+                      child: CardSearch(weatherData: weatherData),
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 15),
+                ),
+              ],
+            );
+          })
+        ]),
+      ),
+    );
+  }
+}
+
+class CardSearch extends StatelessWidget {
+  const CardSearch({
+    Key? key,
+    required this.weatherData,
+  }) : super(key: key);
+
+  final WeatherModel weatherData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        child: SizedBox(
+          width: context.width * .7,
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyText(
+                  title: weatherData.cityName,
+                  style: getMediumStyle(),
+                ),
+                MyText(
+                  title: weatherData.temp.kelvinToCelsiusString(),
+                  style: getBoldStyle(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    MyText(
+                      title: weatherData.tempMin.kelvinToCelsiusString(),
+                      style: getLightStyle(),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    child: MyText(title: '/'),
+                  ),
+                ),
+                Column(
+                  children: [
+                    MyText(
+                      title: weatherData.tempMax.kelvinToCelsiusString(),
+                      style: getLightStyle(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({
+    Key? key,
+    required this.appCubit,
+  }) : super(key: key);
+
+  final AppCubit appCubit;
+
+  @override
+  State<SearchWidget> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 15),
+      child: Center(
+        child: MyTextField(
+          hintText: 'Search',
+          onTap: () {
+            MitX.to(const SearchView());
+          },
+        ),
+      ),
     );
   }
 }

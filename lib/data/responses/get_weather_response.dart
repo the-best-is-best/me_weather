@@ -4,6 +4,8 @@ part 'get_weather_response.g.dart';
 @JsonSerializable()
 class GetWeatherResponse {
   final int? cod;
+  //final String? message;
+
   final int? id;
   @JsonKey(name: "name")
   final String? cityName;

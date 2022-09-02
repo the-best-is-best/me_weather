@@ -246,6 +246,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
+  drag_and_drop_lists:
+    dependency: "direct main"
+    description:
+      name: drag_and_drop_lists
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -456,7 +463,7 @@ packages:
     source: hosted
     version: "2.1.0"
   http:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"

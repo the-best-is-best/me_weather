@@ -936,19 +936,7 @@
         "timezone": "Africa/Algiers"
     },
     {
-        "city": "Sidi bel Abbes",
-        "city_ascii": "Sidi bel Abbes",
-        "lat": 35.19034426,
-        "lng": -0.639971559,
-        "pop": 200186.5,
-        "country": "Algeria",
-        "iso2": "DZ",
-        "iso3": "DZA",
-        "province": "Sidi Bel Abbès",
-        "timezone": "Africa/Algiers"
-    },
-    {
-        "city": "Tlimcen",
+        "city": "Tlemcen",
         "city_ascii": "Tlimcen",
         "lat": 34.89041424,
         "lng": -1.32000757,
@@ -984,18 +972,6 @@
         "timezone": "Africa/Algiers"
     },
     {
-        "city": "Sefra",
-        "city_ascii": "Sefra",
-        "lat": 32.76041506,
-        "lng": -0.579949383,
-        "pop": 51118,
-        "country": "Algeria",
-        "iso2": "DZ",
-        "iso3": "DZA",
-        "province": "Naâma",
-        "timezone": "Africa/Algiers"
-    },
-    {
         "city": "Skikda",
         "city_ascii": "Skikda",
         "lat": 36.88042198,
@@ -1005,18 +981,6 @@
         "iso2": "DZ",
         "iso3": "DZA",
         "province": "Skikda",
-        "timezone": "Africa/Algiers"
-    },
-    {
-        "city": "Djanet",
-        "city_ascii": "Djanet",
-        "lat": 24.5529057,
-        "lng": 9.482252969,
-        "pop": 666,
-        "country": "Algeria",
-        "iso2": "DZ",
-        "iso3": "DZA",
-        "province": "Illizi",
         "timezone": "Africa/Algiers"
     },
     {
@@ -1128,7 +1092,7 @@
         "timezone": "Africa/Algiers"
     },
     {
-        "city": "Tiarat",
+        "city": "Tiaret",
         "city_ascii": "Tiarat",
         "lat": 35.38043601,
         "lng": 1.319960489,
@@ -1488,18 +1452,6 @@
         "timezone": "Europe/Andorra"
     },
     {
-        "city": "Mucusso",
-        "city_ascii": "Mucusso",
-        "lat": -18.01953449,
-        "lng": 21.42999914,
-        "pop": 100,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cuando Cubango",
-        "timezone": "Africa/Luanda"
-    },
-    {
         "city": "Lucapa",
         "city_ascii": "Lucapa",
         "lat": -8.419603659,
@@ -1512,7 +1464,7 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Capenda-Camulemba",
+        "city": "Lunda Norte",
         "city_ascii": "Capenda-Camulemba",
         "lat": -9.4195943,
         "lng": 18.43002722,
@@ -1536,23 +1488,11 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Muconda",
+        "city": "Lunda Sul",
         "city_ascii": "Muconda",
         "lat": -10.59962563,
         "lng": 21.31998002,
         "pop": 2324,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Lunda Sul",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Cacolo",
-        "city_ascii": "Cacolo",
-        "lat": -10.14962726,
-        "lng": 19.2600024,
-        "pop": 984,
         "country": "Angola",
         "iso2": "AO",
         "iso3": "AGO",
@@ -1644,7 +1584,7 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Mbanza-Congo",
+        "city": "Mbanza Congo",
         "city_ascii": "Mbanza-Congo",
         "lat": -6.269605694,
         "lng": 14.23999874,
@@ -1692,18 +1632,6 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Calucinga",
-        "city_ascii": "Calucinga",
-        "lat": -11.31958169,
-        "lng": 16.19998246,
-        "pop": 531,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Bié",
-        "timezone": "Africa/Luanda"
-    },
-    {
         "city": "Camacupa",
         "city_ascii": "Camacupa",
         "lat": -12.01959064,
@@ -1728,42 +1656,6 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Mavinga",
-        "city_ascii": "Mavinga",
-        "lat": -15.7895414,
-        "lng": 20.36003861,
-        "pop": 30000,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cuando Cubango",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Cuito Caunavale",
-        "city_ascii": "Cuito Caunavale",
-        "lat": -15.15960569,
-        "lng": 19.16998205,
-        "pop": 149,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cuando Cubango",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Luiana",
-        "city_ascii": "Luiana",
-        "lat": -17.36954832,
-        "lng": 22.99998083,
-        "pop": 150,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cuando Cubango",
-        "timezone": "Africa/Luanda"
-    },
-    {
         "city": "Ondjiva",
         "city_ascii": "Ondjiva",
         "lat": -17.06961831,
@@ -1776,54 +1668,6 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Chitado",
-        "city_ascii": "Chitado",
-        "lat": -17.31962889,
-        "lng": 13.92001827,
-        "pop": 468.5,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cunene",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Chibemba",
-        "city_ascii": "Chibemba",
-        "lat": -15.74959552,
-        "lng": 14.0800085,
-        "pop": 1502,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Huíla",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Chibia",
-        "city_ascii": "Chibia",
-        "lat": -15.1896297,
-        "lng": 13.69000647,
-        "pop": 1411,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Huíla",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Quipungo",
-        "city_ascii": "Quipungo",
-        "lat": -14.82954832,
-        "lng": 14.55000565,
-        "pop": 186,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Huíla",
-        "timezone": "Africa/Luanda"
-    },
-    {
         "city": "Luau",
         "city_ascii": "Luau",
         "lat": -10.7095414,
@@ -1833,66 +1677,6 @@
         "iso2": "AO",
         "iso3": "AGO",
         "province": "Moxico",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Cangamba",
-        "city_ascii": "Cangamba",
-        "lat": -13.69959145,
-        "lng": 19.86001745,
-        "pop": 1307,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Moxico",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Lumbala Nguimbo",
-        "city_ascii": "Lumbala Nguimbo",
-        "lat": -14.09961871,
-        "lng": 21.44002437,
-        "pop": 25,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Moxico",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Cazombo",
-        "city_ascii": "Cazombo",
-        "lat": -11.88957273,
-        "lng": 22.90003861,
-        "pop": 298,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Moxico",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Dundo",
-        "city_ascii": "Dundo",
-        "lat": -7.380028871,
-        "lng": 20.82998409,
-        "pop": 11985,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Lunda Norte",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Ambriz",
-        "city_ascii": "Ambriz",
-        "lat": -7.85498696,
-        "lng": 13.12502803,
-        "pop": 17000,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Bengo",
         "timezone": "Africa/Luanda"
     },
     {
@@ -1956,18 +1740,6 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Xangongo",
-        "city_ascii": "Xangongo",
-        "lat": -16.74002602,
-        "lng": 14.96998002,
-        "pop": 447,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Cunene",
-        "timezone": "Africa/Luanda"
-    },
-    {
         "city": "Luena",
         "city_ascii": "Luena",
         "lat": -11.79004393,
@@ -1977,18 +1749,6 @@
         "iso2": "AO",
         "iso3": "AGO",
         "province": "Moxico",
-        "timezone": "Africa/Luanda"
-    },
-    {
-        "city": "Tômbua",
-        "city_ascii": "Tombua",
-        "lat": -15.80003172,
-        "lng": 11.85998897,
-        "pop": 40000,
-        "country": "Angola",
-        "iso2": "AO",
-        "iso3": "AGO",
-        "province": "Namibe",
         "timezone": "Africa/Luanda"
     },
     {
@@ -2076,486 +1836,6 @@
         "timezone": "Africa/Luanda"
     },
     {
-        "city": "Artigas Base",
-        "city_ascii": "Artigas Base",
-        "lat": -62.17388669,
-        "lng": -58.86386407,
-        "pop": 34.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Capitan Arturo Prat Station",
-        "city_ascii": "Capitan Arturo Prat Station",
-        "lat": -62.49950682,
-        "lng": -59.68331852,
-        "pop": 41,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Marambio Station",
-        "city_ascii": "Vicecomodoro Marambio Station",
-        "lat": -64.23288939,
-        "lng": -56.6500153,
-        "pop": 102.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Zucchelli Station",
-        "city_ascii": "Terra Nova Bay",
-        "lat": -74.61919259,
-        "lng": 164.2190271,
-        "pop": 60,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Rothera Station",
-        "city_ascii": "Rothera Station",
-        "lat": -67.5647756,
-        "lng": -68.12354055,
-        "pop": 76,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Palmer Station",
-        "city_ascii": "Palmer Station",
-        "lat": -64.76241335,
-        "lng": -64.0468756,
-        "pop": 30.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Base Presidente Montalva",
-        "city_ascii": "Teniente Rodolfo Marsh Station",
-        "lat": -62.18274357,
-        "lng": -58.90765233,
-        "pop": 115,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Carlini Station",
-        "city_ascii": "Teniente Jubany Station",
-        "lat": -62.22414386,
-        "lng": -58.65047599,
-        "pop": 40,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "King Sejong Station",
-        "city_ascii": "King Sejong Station",
-        "lat": -62.2248534,
-        "lng": -58.77159876,
-        "pop": 53.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Great Wall Station",
-        "city_ascii": "Great Wall Station",
-        "lat": -62.21631997,
-        "lng": -58.9666956,
-        "pop": 26,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Escudero Base",
-        "city_ascii": "Escudero Station",
-        "lat": -62.19496251,
-        "lng": -58.95266582,
-        "pop": 20,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Elephant Island",
-        "city_ascii": "Elephant Island, South Shetland Islands",
-        "lat": -61.99958901,
-        "lng": -57.99998458,
-        "pop": 3,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Scott Base",
-        "city_ascii": "Scott Base",
-        "lat": -77.84693819,
-        "lng": 166.7491023,
-        "pop": 49.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "McMurdo Station",
-        "city_ascii": "McMurdo Station",
-        "lat": -77.73228239,
-        "lng": 166.8694157,
-        "pop": 600,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Zhongshan Station",
-        "city_ascii": "Zhongshan Station",
-        "lat": -69.43406299,
-        "lng": 76.33929808,
-        "pop": 42.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Vostok",
-        "city_ascii": "Vostok",
-        "lat": -78.46628416,
-        "lng": 106.8000337,
-        "pop": 19,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Peter I Island",
-        "city_ascii": "Peter I Island",
-        "lat": -68.83286701,
-        "lng": 90.49999508,
-        "pop": 0.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Mirny Station",
-        "city_ascii": "Mirny Station",
-        "lat": -66.57552952,
-        "lng": 93.00628846,
-        "pop": 114.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Mawson Station",
-        "city_ascii": "Mawson Station",
-        "lat": -67.61452032,
-        "lng": 62.87500073,
-        "pop": 40,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Davis Station",
-        "city_ascii": "Davis Station",
-        "lat": -68.77767439,
-        "lng": 78.14073509,
-        "pop": 45,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Concordia Research Station",
-        "city_ascii": "Concordia Research Station",
-        "lat": -74.66630939,
-        "lng": 124.1670357,
-        "pop": 15,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Casey Station",
-        "city_ascii": "Casey Station",
-        "lat": -66.28608614,
-        "lng": 110.536214,
-        "pop": 125,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Amundsen–Scott South Pole Station",
-        "city_ascii": "Amundsen–Scott South Pole Station",
-        "lat": -89.98289386,
-        "lng": 139.2669926,
-        "pop": 125,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Wasa Station",
-        "city_ascii": "Wasa Station",
-        "lat": -73.0496122,
-        "lng": -13.41671106,
-        "pop": 5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Troll Station",
-        "city_ascii": "Troll Station",
-        "lat": -72.01629026,
-        "lng": 2.533323119,
-        "pop": 25.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Svea Station",
-        "city_ascii": "Svea Station",
-        "lat": -74.58290363,
-        "lng": -11.21669031,
-        "pop": 5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Novolazarevskaya Station",
-        "city_ascii": "Novolazarevskaya Station",
-        "lat": -71.30123475,
-        "lng": -11.8502129,
-        "pop": 35,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Neumayer Station III",
-        "city_ascii": "Neumayer",
-        "lat": -70.89039668,
-        "lng": -7.838438004,
-        "pop": 40,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Maitri Station",
-        "city_ascii": "Maitri Station",
-        "lat": -70.7821796,
-        "lng": 11.7304584,
-        "pop": 33,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Halley Station",
-        "city_ascii": "Halley Station",
-        "lat": -76.09226319,
-        "lng": -26.4741567,
-        "pop": 43,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Belgrano Station",
-        "city_ascii": "General Belgrano Station",
-        "lat": -77.86632078,
-        "lng": -34.61668319,
-        "pop": 57,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Camp Sobral",
-        "city_ascii": "Doctor Sobral",
-        "lat": -81.17908472,
-        "lng": -40.50153152,
-        "pop": 20,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Aboa Station",
-        "city_ascii": "Aboa Station",
-        "lat": -75.04959349,
-        "lng": -13.41671106,
-        "pop": 15,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "San Martín Station",
-        "city_ascii": "San Martín Station",
-        "lat": -68.1163216,
-        "lng": -67.0999976,
-        "pop": 19,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Gen. O'Higgins Station",
-        "city_ascii": "General Bernado O'Higgins Station",
-        "lat": -63.32841823,
-        "lng": -57.88959352,
-        "pop": 30,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Esperanza Station",
-        "city_ascii": "Esperanza Station",
-        "lat": -63.37532865,
-        "lng": -57.02590151,
-        "pop": 152.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Orcadas Station",
-        "city_ascii": "Orcadas Station",
-        "lat": -60.7328963,
-        "lng": -44.73330082,
-        "pop": 29.5,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Signy Research Station",
-        "city_ascii": "Signy Island",
-        "lat": -60.63130815,
-        "lng": -45.60070332,
-        "pop": 4,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Dumont d'Urville Station",
-        "city_ascii": "Dumont d'Urville Station",
-        "lat": -66.77505091,
-        "lng": 139.9636836,
-        "pop": 75,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
-        "city": "Showa Station",
-        "city_ascii": "Showa Station",
-        "lat": -69.03039249,
-        "lng": 39.7460831,
-        "pop": 50,
-        "country": "Antarctica",
-        "iso2": "AQ",
-        "iso3": "ATA",
-        "province": "",
-        "timezone": null
-    },
-    {
         "city": "Saint John's",
         "city_ascii": "Saint John's",
         "lat": 17.11803652,
@@ -2590,42 +1870,6 @@
         "iso3": "ARG",
         "province": "Santa Cruz",
         "timezone": "America/Argentina/Rio_Gallegos"
-    },
-    {
-        "city": "Comondante Luis Piedrabuena",
-        "city_ascii": "Comondante Luis Piedrabuena",
-        "lat": -49.97454865,
-        "lng": -68.90347273,
-        "pop": 410,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Santa Cruz",
-        "timezone": "America/Argentina/Rio_Gallegos"
-    },
-    {
-        "city": "Paso Rio Mayo",
-        "city_ascii": "Paso Rio Mayo",
-        "lat": -45.68337563,
-        "lng": -70.26657434,
-        "pop": 1825,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": "America/Argentina/Catamarca"
-    },
-    {
-        "city": "Alto Rio Sanguer",
-        "city_ascii": "Alto Rio Sanguer",
-        "lat": -45.03328611,
-        "lng": -70.83328394,
-        "pop": 1548,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": "America/Argentina/Catamarca"
     },
     {
         "city": "El Maiten",
@@ -3072,18 +2316,6 @@
         "timezone": "America/Argentina/Jujuy"
     },
     {
-        "city": "Susques",
-        "city_ascii": "Susques",
-        "lat": -23.41667275,
-        "lng": -66.4833169,
-        "pop": 1093,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Jujuy",
-        "timezone": "America/Argentina/Jujuy"
-    },
-    {
         "city": "Chepes",
         "city_ascii": "Chepes",
         "lat": -31.34998696,
@@ -3125,18 +2357,6 @@
         "lat": -25.08334105,
         "lng": -64.18335392,
         "pop": 13376,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Salta",
-        "timezone": "America/Argentina/Salta"
-    },
-    {
-        "city": "General Guemes",
-        "city_ascii": "General Guemes",
-        "lat": -24.6666223,
-        "lng": -65.04996769,
-        "pop": 19828,
         "country": "Argentina",
         "iso2": "AR",
         "iso3": "ARG",
@@ -3214,18 +2434,6 @@
         "iso3": "ARG",
         "province": "Formosa",
         "timezone": "America/Argentina/Cordoba"
-    },
-    {
-        "city": "Doctor Pedro P. Pena",
-        "city_ascii": "Doctor Pedro P. Pena",
-        "lat": -22.47998574,
-        "lng": -62.29998051,
-        "pop": 6143,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Formosa",
-        "timezone": "America/Asuncion"
     },
     {
         "city": "San Lorenzo",
@@ -3348,54 +2556,6 @@
         "timezone": "America/Argentina/San_Juan"
     },
     {
-        "city": "Las Plumas",
-        "city_ascii": "Las Plumas",
-        "lat": -43.41627887,
-        "lng": -67.24998845,
-        "pop": 605,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": "America/Argentina/Catamarca"
-    },
-    {
-        "city": "Gastre",
-        "city_ascii": "Gastre",
-        "lat": -42.28296303,
-        "lng": -69.23330408,
-        "pop": 557,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": "America/Argentina/Catamarca"
-    },
-    {
-        "city": "Telsen",
-        "city_ascii": "Telsen",
-        "lat": -42.39959674,
-        "lng": -66.95000676,
-        "pop": 493,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": "America/Argentina/Catamarca"
-    },
-    {
-        "city": "Malargue",
-        "city_ascii": "Malargue",
-        "lat": -35.46611815,
-        "lng": -69.58330855,
-        "pop": 11847,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Mendoza",
-        "timezone": "America/Argentina/Mendoza"
-    },
-    {
         "city": "Tunuyan",
         "city_ascii": "Tunuyan",
         "lat": -33.56618244,
@@ -3485,18 +2645,6 @@
         "lat": -37.66551878,
         "lng": -59.80002975,
         "pop": 10609,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Ciudad de Buenos Aires",
-        "timezone": "America/Argentina/Buenos_Aires"
-    },
-    {
-        "city": "Mar de Ajo",
-        "city_ascii": "Mar de Ajo",
-        "lat": -36.71622272,
-        "lng": -56.67660283,
-        "pop": 13610,
         "country": "Argentina",
         "iso2": "AR",
         "iso3": "ARG",
@@ -3636,18 +2784,6 @@
         "timezone": "America/Argentina/Salta"
     },
     {
-        "city": "Sierra Colorado",
-        "city_ascii": "Sierra Colorado",
-        "lat": -40.58286009,
-        "lng": -67.79998071,
-        "pop": 1522,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Río Negro",
-        "timezone": "America/Argentina/Salta"
-    },
-    {
         "city": "Mercedes",
         "city_ascii": "Mercedes",
         "lat": -33.68958576,
@@ -3718,18 +2854,6 @@
         "iso3": "ARG",
         "province": "Jujuy",
         "timezone": "America/Argentina/Jujuy"
-    },
-    {
-        "city": "Chilecito",
-        "city_ascii": "Chilecito",
-        "lat": -29.16552081,
-        "lng": -67.49999903,
-        "pop": 20343,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "La Rioja",
-        "timezone": null
     },
     {
         "city": "Chamical",
@@ -3825,18 +2949,6 @@
         "iso2": "AR",
         "iso3": "ARG",
         "province": "Santiago del Estero",
-        "timezone": "America/Argentina/Cordoba"
-    },
-    {
-        "city": "Juan Jose Castelli",
-        "city_ascii": "Juan Jose Castelli",
-        "lat": -25.9495414,
-        "lng": -60.61664657,
-        "pop": 9421,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chaco",
         "timezone": "America/Argentina/Cordoba"
     },
     {
@@ -4378,18 +3490,6 @@
         "iso3": "ARG",
         "province": "Santa Cruz",
         "timezone": "America/Argentina/Rio_Gallegos"
-    },
-    {
-        "city": "Comodoro Rivadavia",
-        "city_ascii": "Comodoro Rivadavia",
-        "lat": -45.87003091,
-        "lng": -67.49999903,
-        "pop": 123291,
-        "country": "Argentina",
-        "iso2": "AR",
-        "iso3": "ARG",
-        "province": "Chubut",
-        "timezone": null
     },
     {
         "city": "Mendoza",
@@ -18155,18 +17255,6 @@
         "iso3": "CAN",
         "province": "Alberta",
         "timezone": "America/Edmonton"
-    },
-    {
-        "city": "Fort St. John",
-        "city_ascii": "Fort St. John",
-        "lat": 56.24998903,
-        "lng": -120.8332811,
-        "pop": 18089,
-        "country": "Canada",
-        "iso2": "CA",
-        "iso3": "CAN",
-        "province": "British Columbia",
-        "timezone": null
     },
     {
         "city": "Iqaluit",
@@ -38845,18 +37933,6 @@
         "timezone": "Asia/Tehran"
     },
     {
-        "city": "Urmia",
-        "city_ascii": "Orumiyeh",
-        "lat": 37.52999473,
-        "lng": 44.99998165,
-        "pop": 577307,
-        "country": "Iran",
-        "iso2": "IR",
-        "iso3": "IRN",
-        "province": "West Azarbaijan",
-        "timezone": null
-    },
-    {
         "city": "Ahar",
         "city_ascii": "Ahar",
         "lat": 38.48290814,
@@ -51746,18 +50822,6 @@
         "timezone": "America/Managua"
     },
     {
-        "city": "San Juan del Sur",
-        "city_ascii": "San Juan del Sur",
-        "lat": 11.24999676,
-        "lng": -85.86004114,
-        "pop": 5032,
-        "country": "Nicaragua",
-        "iso2": "NI",
-        "iso3": "NIC",
-        "province": "Nicaragua",
-        "timezone": null
-    },
-    {
         "city": "Esteli",
         "city_ascii": "Esteli",
         "lat": 13.08998781,
@@ -59102,18 +58166,6 @@
         "timezone": "Asia/Kamchatka"
     },
     {
-        "city": "Oymyakon",
-        "city_ascii": "Oymyakon",
-        "lat": 0,
-        "lng": 0,
-        "pop": 486,
-        "country": "Russia",
-        "iso2": "RU",
-        "iso3": "RUS",
-        "province": "Sakha (Yakutia)",
-        "timezone": null
-    },
-    {
         "city": "Timiryazevskiy",
         "city_ascii": "Timiryazevskiy",
         "lat": 56.49260988,
@@ -64070,18 +63122,6 @@
         "timezone": "Europe/Moscow"
     },
     {
-        "city": "Penza",
-        "city_ascii": "Penza",
-        "lat": 53.18002138,
-        "lng": 44.99998165,
-        "pop": 491943,
-        "country": "Russia",
-        "iso2": "RU",
-        "iso3": "RUS",
-        "province": "Penza",
-        "timezone": null
-    },
-    {
         "city": "Ryazan",
         "city_ascii": "Ryazan",
         "lat": 54.61995933,
@@ -64812,18 +63852,6 @@
         "iso3": "RUS",
         "province": "Maga Buryatdan",
         "timezone": "Asia/Magadan"
-    },
-    {
-        "city": "Perm",
-        "city_ascii": "Perm",
-        "lat": 57.99995974,
-        "lng": 56.24999263,
-        "pop": 924154,
-        "country": "Russia",
-        "iso2": "RU",
-        "iso3": "RUS",
-        "province": "Perm'",
-        "timezone": null
     },
     {
         "city": "Palana",
