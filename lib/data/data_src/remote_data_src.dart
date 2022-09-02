@@ -1,3 +1,5 @@
+import 'package:mit_x/mit_x.dart';
+
 import '../network/app_api.dart';
 import '../responses/forcast_weather_response.dart';
 import '../responses/get_weather_response.dart';
@@ -18,26 +20,28 @@ class RemoteDataSrcImpl extends RemoteDataSrc {
 
   @override
   Future<GetWeatherResponse> getWeatherByCityName(String cityName) async {
-    return _appServicesClient.getWeatherByCountry(cityName: cityName);
+    return _appServicesClient.getWeatherByCountry(
+        cityName: cityName, lang: MitX.locale!.languageCode);
   }
 
   @override
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastData(
       String cityName) async {
     return _appServicesClient.getFiveDaysThreeHoursForcastDataByCountry(
-        cityName: cityName);
+        cityName: cityName, lang: MitX.locale!.languageCode);
   }
 
   @override
   Future<GetWeatherResponse> getWeatherDataByLocation(
       String lon, String lat) async {
-    return _appServicesClient.getWeatherDataByLocation(lat: lat, lon: lon);
+    return _appServicesClient.getWeatherDataByLocation(
+        lat: lat, lon: lon, lang: MitX.locale!.languageCode);
   }
 
   @override
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastDataByLocation(
       String lon, String lat) async {
     return _appServicesClient.getFiveDaysThreeHoursForcastDataByLocation(
-        lat: lat, lon: lon);
+        lat: lat, lon: lon, lang: MitX.locale!.languageCode);
   }
 }

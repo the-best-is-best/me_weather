@@ -81,12 +81,19 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       MitX.openDrawer();
                     },
                   ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {},
-                    )
-                  ],
+                  // actions: [
+                  //   IconButton(
+                  //     icon: const Icon(Icons.language),
+                  //     onPressed: () async {
+                  //       if (MitX.locale!.languageCode == "en") {
+                  //         await MitX.changeLocale(const Locale('ar'));
+                  //       } else {
+                  //         await MitX.changeLocale(const Locale('en'));
+                  //       }
+                  //       appCubit.getWeatherDataAfterLanguageChanged();
+                  //     },
+                  //   )
+                  // ],
                 );
               },
               fallback: (context) =>

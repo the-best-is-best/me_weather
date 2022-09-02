@@ -13,22 +13,26 @@ abstract class AppServicesClient {
   Future<GetWeatherResponse> getWeatherDataByLocation({
     @Query('lat') required String lat,
     @Query('lon') required String lon,
+    @Query('lang') required String lang,
     @Query("appid") String appId = Constants.token,
   });
   @GET(Constants.endPointWeather)
   Future<GetWeatherResponse> getWeatherByCountry({
     @Query('q') required String cityName,
+    @Query('lang') required String lang,
     @Query("appid") String appId = Constants.token,
   });
   @GET(Constants.endPointForcast)
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastDataByLocation({
     @Query('lat') required String lat,
     @Query('lon') required String lon,
+    @Query('lang') required String lang,
     @Query("appid") String appId = Constants.token,
   });
   @GET(Constants.endPointForcast)
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastDataByCountry({
     @Query('q') required String cityName,
+    @Query('lang') required String lang,
     @Query("appid") String appId = Constants.token,
   });
 }

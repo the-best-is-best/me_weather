@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
             child: MitXMaterialApp(
               debugShowCheckedModeBanner: false,
               fallbackLocale: const Locale('en'),
-              locale: MitX.deviceLocale,
+              locale: MitX.locale ?? MitX.deviceLocale,
               initialRoute: '/',
               translations: LangController(),
               supportedLocales: const [

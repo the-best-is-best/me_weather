@@ -19,11 +19,15 @@ class _AppServicesClient implements AppServicesClient {
 
   @override
   Future<GetWeatherResponse> getWeatherDataByLocation(
-      {required lat, required lon, appId = Constants.token}) async {
+      {required lat,
+      required lon,
+      required lang,
+      appId = Constants.token}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'lat': lat,
       r'lon': lon,
+      r'lang': lang,
       r'appid': appId
     };
     final _headers = <String, dynamic>{};
@@ -40,9 +44,13 @@ class _AppServicesClient implements AppServicesClient {
 
   @override
   Future<GetWeatherResponse> getWeatherByCountry(
-      {required cityName, appId = Constants.token}) async {
+      {required cityName, required lang, appId = Constants.token}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': cityName, r'appid': appId};
+    final queryParameters = <String, dynamic>{
+      r'q': cityName,
+      r'lang': lang,
+      r'appid': appId
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -57,11 +65,15 @@ class _AppServicesClient implements AppServicesClient {
 
   @override
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastDataByLocation(
-      {required lat, required lon, appId = Constants.token}) async {
+      {required lat,
+      required lon,
+      required lang,
+      appId = Constants.token}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'lat': lat,
       r'lon': lon,
+      r'lang': lang,
       r'appid': appId
     };
     final _headers = <String, dynamic>{};
@@ -78,9 +90,13 @@ class _AppServicesClient implements AppServicesClient {
 
   @override
   Future<ForcastWeatherResponse> getFiveDaysThreeHoursForcastDataByCountry(
-      {required cityName, appId = Constants.token}) async {
+      {required cityName, required lang, appId = Constants.token}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': cityName, r'appid': appId};
+    final queryParameters = <String, dynamic>{
+      r'q': cityName,
+      r'lang': lang,
+      r'appid': appId
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

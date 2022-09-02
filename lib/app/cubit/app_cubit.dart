@@ -232,4 +232,17 @@ class AppCubit extends Cubit<AppStates> {
 
     emit(AppLoadedDataState());
   }
+
+  void getWeatherDataAfterLanguageChanged() {
+    listForcastByDaysWeather = [];
+    listForcastWeather = {};
+    listForcastWeather = {};
+    listThreeDayWeather = [];
+    listWeather = [];
+    emit(AppLoadDataState());
+    for (var e in citiesUser) {
+      getWeatherDataByCounty(e, byCityUser: true);
+    }
+    emit(AppLoadedDataState());
+  }
 }
