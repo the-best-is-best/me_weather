@@ -2,7 +2,6 @@ import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_date.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
 import 'package:me_weather/app/resources/font_manager.dart';
@@ -13,7 +12,6 @@ import 'package:me_weather/presentation/components/my_input_field.dart';
 import 'package:me_weather/presentation/search/view/search_view.dart';
 import 'package:me_weather/presentation/home/widgets/weather_details.dart';
 import 'package:mit_x/mit_x.dart';
-import 'package:weather_icons/weather_icons.dart';
 import '../../../app/cubit/app_cubit.dart';
 import '../../../app/cubit/app_states.dart';
 import '../../components/my_text.dart';
@@ -47,7 +45,9 @@ class _BuildPageState extends State<BuildPage> {
 
       return Scaffold(
         key: MitX.scaffoldKey,
-        drawer: const MyDrawer(),
+        drawer: MyDrawer(
+          pageController: pageController,
+        ),
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(80),
             child: HomeAppBar(
@@ -265,11 +265,18 @@ class _BuildPageState extends State<BuildPage> {
   }
 }
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({
     Key? key,
+    required this.pageController,
   }) : super(key: key);
+  final PageController pageController;
 
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -290,20 +297,32 @@ class MyDrawer extends StatelessWidget {
               children: [
                 SearchWidget(appCubit: appCubit),
                 const SizedBox(height: 15),
-                ListView.separated(
+                ReorderableListView.builder(
                   shrinkWrap: true,
                   itemCount: appCubit.listWeather.length,
                   itemBuilder: (context, index) {
                     WeatherModel weatherData = appCubit.listWeather[index];
-                    return Dismissible(
-                      key: UniqueKey(),
-                      onDismissed: (direction) =>
-                          appCubit.deleteWeather(weatherData.cityName),
-                      child: CardSearch(weatherData: weatherData),
+                    return GestureDetector(
+                      key: ValueKey(weatherData),
+                      onTap: () {
+                        widget.pageController.jumpToPage(index);
+                        MitX.back();
+                      },
+                      child: Dismissible(
+                        key: ValueKey(weatherData),
+                        onDismissed: (direction) =>
+                            appCubit.deleteWeather(weatherData.cityName),
+                        child: CardSearch(weatherData: weatherData),
+                      ),
                     );
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 15),
+                  onReorder: (oldIndex, newIndex) {
+                    setState(() {
+                      if (newIndex > oldIndex) newIndex--;
+
+                      appCubit.changeListWeather(oldIndex, newIndex);
+                    });
+                  },
                 ),
               ],
             );
@@ -397,6 +416,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: Center(
         child: MyTextField(
           hintText: 'Search',
+          keyboardType: TextInputType.none,
           onTap: () {
             MitX.to(const SearchView());
           },

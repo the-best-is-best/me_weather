@@ -12,6 +12,7 @@ class MyTextField extends StatelessWidget {
     this.onChanged,
     this.controller,
     this.onTap,
+    this.keyboardType,
   }) : super(key: key);
   final TextStyle? style;
   final String? hintText;
@@ -20,11 +21,12 @@ class MyTextField extends StatelessWidget {
   final ValueChanged<String>? onSubmitted;
   final TextEditingController? controller;
   final GestureTapCallback? onTap;
-
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      keyboardType: keyboardType,
       style: style ?? getRegularStyle(color: Colors.white),
       decoration: InputDecoration(
           hintStyle: style ?? getRegularStyle(color: Colors.white),

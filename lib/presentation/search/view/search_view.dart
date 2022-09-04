@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:me_weather/presentation/home/widgets/background_image.dart';
-import 'package:mit_x/mit_x.dart';
 
 import '../../../app/cubit/app_cubit.dart';
 import '../../../app/cubit/app_states.dart';

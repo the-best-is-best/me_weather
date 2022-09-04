@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -56,19 +57,34 @@ class AppCubit extends Cubit<AppStates> {
   String searchTextController = "";
   List<CityModel> searchCity = [];
   void searchForCity(String city) {
-    emit(AppSearchCityState());
     searchCity = [];
-    searchTextController = city;
-    if (city.isEmpty) {
-      searchCity = [];
-      emit(AppSearchedCityState());
-      return;
-    }
-    searchCity = citiesData
-        .where((element) => element.city.toLowerCase().contains(city))
-        .toList();
+    if (city.length >= 3) {
+      emit(AppSearchCityState());
+      searchTextController = city;
+      if (city.isEmpty) {
+        searchCity = [];
+        emit(AppSearchedCityState());
+        return;
+      }
 
-    emit(AppSearchedCityState());
+      for (var element in citiesData) {
+        if (element.city.toLowerCase().contains(city)) {
+          if (citiesUser.isNotEmpty) {
+            bool isExist = false;
+            for (var e in citiesUser) {
+              if (e.toLowerCase() == element.city.toLowerCase()) {
+                isExist = true;
+              }
+              if (!isExist) searchCity.add(element);
+            }
+          } else {
+            searchCity.add(element);
+          }
+        }
+      }
+
+      emit(AppSearchedCityState());
+    }
   }
 
 // weather data
@@ -78,11 +94,10 @@ class AppCubit extends Cubit<AppStates> {
     int maxDays = 2;
     listThreeDayWeather.add(listWeather[currentCity]);
     listForcastByDaysWeather.add(listWeather[currentCity]);
-    print(
-        "important ${listForcastWeather[currentCity]?[currentCity].dateTime}");
+
     for (int days = 1; days <= maxDays; days++) {
       WeatherModel? nextDayWeather =
-          listForcastWeather[currentCity]?.firstWhereOrNull((element) {
+          listForcastWeather[currentCity]!.firstWhereOrNull((element) {
         return element.dateTime.day ==
                 listWeather[currentCity].dateTime.day + days &&
             element.dateTime.hour == 11;
@@ -94,8 +109,8 @@ class AppCubit extends Cubit<AppStates> {
     // get Weather Three Days
 
     for (int days = 1; days <= maxDays; days++) {
-      WeatherModel? nextDayWeather = listForcastWeather[currentCity]
-          ?.firstWhereOrNull((element) =>
+      WeatherModel? nextDayWeather = listForcastWeather[currentCity]!
+          .firstWhereOrNull((element) =>
               element.dateTime.day ==
                   listWeather[currentCity].dateTime.day + days &&
               element.dateTime.hour == 11);
@@ -178,6 +193,7 @@ class AppCubit extends Cubit<AppStates> {
     box.write('citiesUser', jsonEncode(citiesUser));
   }
 
+  int indexWeather = 0;
   Future getWeatherDataByCounty(String country,
       {bool byCityUser = false}) async {
     emit(AppLoadDataState());
@@ -197,7 +213,8 @@ class AppCubit extends Cubit<AppStates> {
             AppErrorState(error.messages),
           ),
           (data) {
-            listForcastWeather.addAll({listWeather.length - 1: data});
+            listForcastWeather.addAll({indexWeather: data});
+            indexWeather++;
             _getListForcastByDaysWeather();
             emit(AppLoadedDataState());
           },
@@ -209,26 +226,22 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  void deleteWeather(String country) {
+  void deleteWeather(String country) async {
     emit(AppLoadDataState());
+    currentCity = 0;
+    indexWeather = 0;
+    listForcastByDaysWeather = [];
+    listForcastWeather = {};
+    listThreeDayWeather = [];
+    listWeather = [];
     citiesUser.remove(country);
-    listWeather.removeWhere((element) => element.cityName == country);
-    listForcastByDaysWeather
-        .removeWhere((element) => element.cityName == country);
-    listForcastWeather.forEach((key, value) =>
-        value.removeWhere((element) => element.cityName == country));
-    listThreeDayWeather.removeWhere((element) => element.cityName == country);
+
     if (citiesUser.isNotEmpty) {
       box.write('citiesUser', jsonEncode(citiesUser));
-
-      emit(AppLoadedDataState());
-
-      return;
+      for (var e in citiesUser) {
+        await getWeatherDataByCounty(e, byCityUser: true);
+      }
     }
-    for (var e in citiesUser) {
-      getWeatherDataByCounty(e, byCityUser: true);
-    }
-    box.write('citiesUser', jsonEncode(citiesUser));
 
     emit(AppLoadedDataState());
   }
@@ -242,6 +255,26 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppLoadDataState());
     for (var e in citiesUser) {
       getWeatherDataByCounty(e, byCityUser: true);
+    }
+    emit(AppLoadedDataState());
+  }
+
+  void changeListWeather(int oldIndex, int newIndex) async {
+    MitX.back();
+    currentCity = 0;
+    indexWeather = 0;
+
+    emit(AppLoadDataState());
+
+    final itemCityUser = citiesUser.removeAt(oldIndex);
+    citiesUser.insert(newIndex, itemCityUser);
+    box.write('citiesUser', jsonEncode(citiesUser));
+    listForcastByDaysWeather = [];
+    listForcastWeather = {};
+    listThreeDayWeather = [];
+    listWeather = [];
+    for (var e in citiesUser) {
+      await getWeatherDataByCounty(e, byCityUser: true);
     }
     emit(AppLoadedDataState());
   }

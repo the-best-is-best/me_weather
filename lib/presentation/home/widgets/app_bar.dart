@@ -7,7 +7,6 @@ import 'package:me_weather/presentation/components/my_text.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../app/cubit/app_cubit.dart';
-import '../../components/my_input_field.dart';
 import 'search_app_bar.dart';
 
 class HomeAppBar extends StatefulWidget {

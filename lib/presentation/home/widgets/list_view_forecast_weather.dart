@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
+import 'package:me_weather/presentation/components/cached_image.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 import '../../../app/cubit/app_cubit.dart';
@@ -18,7 +19,7 @@ class ListViewForecastWeather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 140,
       child: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -34,6 +35,8 @@ class ListViewForecastWeather extends StatelessWidget {
                       "${DateFormat('h a').format(weatherData[index].dateTime)} "),
               const SizedBox(height: 5),
               MyText(title: weatherData[index].temp.kelvinToCelsiusString()),
+              const SizedBox(height: 5),
+              CachedImage(url: weatherData[index].iconImage, width: 40),
               const SizedBox(height: 5),
               Row(
                 children: [
@@ -60,8 +63,11 @@ class ListViewForecastWeather extends StatelessWidget {
                                               : WeatherIcons.wind_deg_315,
                       size: 20),
                   const SizedBox(width: 5),
-                  MyText(
-                    title: weatherData[index].windSpeed.msToKM(),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: MyText(
+                      title: weatherData[index].windSpeed.msToKM(),
+                    ),
                   ),
                 ],
               ),

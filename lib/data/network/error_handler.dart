@@ -17,7 +17,6 @@ class ErrorHandler implements Exception {
   }
 
   Failure _handleError(DioError error) {
-    print("response: ${error.response!.data}");
 
     switch (error.type) {
       case DioErrorType.connectTimeout:

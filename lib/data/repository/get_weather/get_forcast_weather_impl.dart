@@ -12,26 +12,26 @@ Future<Either<Failure, List<WeatherModel>>> getForcastWeatherByCityNameImpl({
   required String cityName,
 }) async {
   if (await networkInfo.isConnected) {
-    try {
-      var response =
-          await remoteDataSrc.getFiveDaysThreeHoursForcastData(cityName);
+    //  try {
+    var response =
+        await remoteDataSrc.getFiveDaysThreeHoursForcastData(cityName);
 
-      if (int.tryParse(response.cod ?? "500")! >= 200 &&
-          int.tryParse(response.cod ?? "500")! <= 299) {
-        //success
-        // return either right
-        // return data
-        return Right(response.toDomain());
-      } else {
-        // return either left
-        // return error
+    if (int.tryParse(response.cod ?? "500")! >= 200 &&
+        int.tryParse(response.cod ?? "500")! <= 299) {
+      //success
+      // return either right
+      // return data
+      return Right(response.toDomain());
+    } else {
+      // return either left
+      // return error
 
-        return Left(
-            Failure(int.tryParse(response.cod ?? "500")!, "Error server"));
-      }
-    } catch (error) {
-      return Left(ErrorHandler.handle(error).failure);
+      return Left(
+          Failure(int.tryParse(response.cod ?? "500")!, "Error server"));
     }
+    //} catch (error) {
+    //   return Left(ErrorHandler.handle(error).failure);
+    // }
   } else {
     //failure
     // return either left

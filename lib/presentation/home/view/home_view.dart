@@ -8,7 +8,6 @@ import 'package:mit_x/mit_x.dart';
 import '../../components/loading_indicator.dart';
 import '../../components/my_input_field.dart';
 import '../../components/my_text.dart';
-import '../widgets/app_bar.dart';
 import '../widgets/build_page.dart';
 
 class HomeView extends StatefulWidget {
