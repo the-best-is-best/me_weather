@@ -3,6 +3,7 @@ import 'package:me_weather/app/resources/font_manager.dart';
 
 class LightTheme {
   static get getTheme => ThemeData(
+        canvasColor: Colors.transparent,
         appBarTheme: const AppBarTheme(
           color: Colors.transparent,
           elevation: 0,
