@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
 import 'package:me_weather/app/resources/routes_manager.dart';
@@ -41,11 +42,75 @@ class WeatherDetails extends StatelessWidget {
                         style: getRegularStyle(fontSize: 12),
                       ),
                       const Spacer(),
-                      MyText(
-                        // ignore: unnecessary_string_interpolations
-                        title:
-                            '${weatherData.tempMax.kelvinToCelsiusString()} / ${weatherData.tempMin.kelvinToCelsiusString()}',
-                        style: getMediumStyle(),
+                      Row(
+                        children: [
+                          Stack(
+                            children: [
+                              SizedBox(
+                                width: getMediumStyle().fontSize! + 50.w,
+                                child: MyText(
+                                  title: appCubit.isFahrenheit
+                                      ? weatherData.tempMax
+                                          .kelvinTFahrenheit()
+                                          .round()
+                                          .toString()
+                                      : weatherData.tempMax
+                                          .kelvinToCelsius()
+                                          .round()
+                                          .toString(),
+                                  style: getMediumStyle(),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0.0,
+                                right: 0.0,
+                                child: Center(
+                                  child: MyText(
+                                    title: appCubit.isFahrenheit
+                                        ? '\u00B0F'
+                                        : '\u00B0C',
+                                    style: getLightStyle(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          MyText(
+                            title: ' /',
+                            style: getMediumStyle(),
+                          ),
+                          Stack(
+                            children: [
+                              SizedBox(
+                                width: getMediumStyle().fontSize! + 50.w,
+                                child: MyText(
+                                  title: appCubit.isFahrenheit
+                                      ? weatherData.tempMin
+                                          .kelvinTFahrenheit()
+                                          .round()
+                                          .toString()
+                                      : weatherData.tempMin
+                                          .kelvinToCelsius()
+                                          .round()
+                                          .toString(),
+                                  style: getMediumStyle(),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0.0,
+                                right: 0.0,
+                                child: Center(
+                                  child: MyText(
+                                    title: appCubit.isFahrenheit
+                                        ? '\u00B0F'
+                                        : '\u00B0C',
+                                    style: getLightStyle(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),

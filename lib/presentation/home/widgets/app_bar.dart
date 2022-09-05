@@ -6,6 +6,7 @@ import 'package:me_weather/app/resources/styles_manger.dart';
 import 'package:me_weather/presentation/components/my_text.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:weather_icons/weather_icons.dart';
 import '../../../app/cubit/app_cubit.dart';
 import 'search_app_bar.dart';
 
@@ -23,14 +24,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
   final FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(listenWhen: (previous, current) {
-      if (current is AppLoadAppDataState ||
-          current is AppLoadedDataState ||
-          current is AppNeededLocationState) {
-        return true;
-      }
-      return false;
-    }, listener: (context, state) {
+    return BlocConsumer<AppCubit, AppStates>(listener: (context, state) {
       if (state is AppNeededLocationState) {
         focusNode.requestFocus();
       }
@@ -48,15 +42,12 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   title: Column(
                     children: [
                       BlocBuilder<AppCubit, AppStates>(
-                          buildWhen: (previous, current) =>
-                              current is AppChangeCountryState,
                           builder: (context, state) {
-                            return MyText(
-                              title: appCubit
-                                  .listWeather[appCubit.currentCity].cityName,
-                              style: getMediumStyle(color: Colors.white),
-                            );
-                          }),
+                        return MyText(
+                          title: appCubit.citiesUser[appCubit.currentCity],
+                          style: getMediumStyle(color: Colors.white),
+                        );
+                      }),
                       const SizedBox(height: 10),
                       SmoothPageIndicator(
                         controller: widget.pageController,
@@ -80,19 +71,16 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       MitX.openDrawer();
                     },
                   ),
-                  // actions: [
-                  //   IconButton(
-                  //     icon: const Icon(Icons.language),
-                  //     onPressed: () async {
-                  //       if (MitX.locale!.languageCode == "en") {
-                  //         await MitX.changeLocale(const Locale('ar'));
-                  //       } else {
-                  //         await MitX.changeLocale(const Locale('en'));
-                  //       }
-                  //       appCubit.getWeatherDataAfterLanguageChanged();
-                  //     },
-                  //   )
-                  // ],
+                  actions: [
+                    IconButton(
+                      icon: Icon(appCubit.isFahrenheit
+                          ? WeatherIcons.fahrenheit
+                          : WeatherIcons.celsius),
+                      onPressed: () async {
+                        appCubit.changeToFahrenheit();
+                      },
+                    )
+                  ],
                 );
               },
               fallback: (context) =>

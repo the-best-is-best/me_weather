@@ -23,3 +23,5 @@ class AppChangeCountryState extends AppStates {}
 class AppSearchCityState extends AppStates {}
 
 class AppSearchedCityState extends AppStates {}
+
+class ChangeToFahrenheitState extends AppStates {}

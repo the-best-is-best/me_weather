@@ -86,12 +86,44 @@ class _BuildPageState extends State<BuildPage> {
                                                       .toTimeString()),
                                             ),
                                             const SizedBox(height: 50),
-                                            MyText(
-                                              title: currentWeather.temp
-                                                  .kelvinToCelsiusString(),
-                                              style: getBoldStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 100.sp),
+                                            SizedBox(
+                                              width: 110.sp + 30.w,
+                                              child: Stack(
+                                                children: [
+                                                  MyText(
+                                                    title: appCubit.isFahrenheit
+                                                        ? currentWeather.temp
+                                                            .kelvinTFahrenheit()
+                                                            .round()
+                                                            .toString()
+                                                        : currentWeather.temp
+                                                            .kelvinToCelsius()
+                                                            .round()
+                                                            .toString(),
+                                                    style: getBoldStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 90.sp),
+                                                  ),
+                                                  Positioned(
+                                                    top: 0.0,
+                                                    right: 0.0,
+                                                    child: Center(
+                                                      child: MyText(
+                                                        title: appCubit
+                                                                .isFahrenheit
+                                                            ? '\u00B0F'
+                                                            : '\u00B0C',
+                                                        style: getMediumStyle(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Center(
+                                              child: MyText(
+                                                  title: currentWeather
+                                                      .description),
                                             ),
                                             WeatherDetails(appCubit: appCubit),
                                             const SizedBox(height: 25),
@@ -135,12 +167,46 @@ class _BuildPageState extends State<BuildPage> {
                                                                     'Real Feel'),
                                                             const SizedBox(
                                                                 height: 5),
-                                                            MyText(
-                                                              title: weatherData
-                                                                  .feelsLike
-                                                                  .kelvinToCelsiusString(),
-                                                              style:
-                                                                  getMediumStyle(),
+                                                            SizedBox(
+                                                              width: getMediumStyle()
+                                                                      .fontSize! +
+                                                                  30.w,
+                                                              child: Stack(
+                                                                children: [
+                                                                  MyText(
+                                                                    title: appCubit
+                                                                            .isFahrenheit
+                                                                        ? currentWeather
+                                                                            .temp
+                                                                            .kelvinTFahrenheit()
+                                                                            .round()
+                                                                            .toString()
+                                                                        : currentWeather
+                                                                            .temp
+                                                                            .kelvinToCelsius()
+                                                                            .round()
+                                                                            .toString(),
+                                                                    style:
+                                                                        getMediumStyle(),
+                                                                  ),
+                                                                  Positioned(
+                                                                    top: 0.0,
+                                                                    right: 0.0,
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          MyText(
+                                                                        title: appCubit.isFahrenheit
+                                                                            ? '\u00B0F'
+                                                                            : '\u00B0C',
+                                                                        style: getLightStyle(
+                                                                            fontSize:
+                                                                                FontSize.s16),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -344,56 +410,139 @@ class CardSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-        child: SizedBox(
-          width: context.width * .7,
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MyText(
-                  title: weatherData.cityName,
-                  style: getMediumStyle(),
-                ),
-                MyText(
-                  title: weatherData.temp.kelvinToCelsiusString(),
-                  style: getBoldStyle(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    MyText(
-                      title: weatherData.tempMin.kelvinToCelsiusString(),
-                      style: getLightStyle(),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    child: MyText(title: '/'),
+    return BlocBuilder<AppCubit, AppStates>(builder: (context, state) {
+      final AppCubit appCubit = AppCubit.get(context);
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          child: SizedBox(
+            width: context.width * .7,
+            child: Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyText(
+                    title: weatherData.cityName,
+                    style: getMediumStyle(),
                   ),
-                ),
-                Column(
-                  children: [
-                    MyText(
-                      title: weatherData.tempMax.kelvinToCelsiusString(),
-                      style: getLightStyle(),
+                  SizedBox(
+                    width: getBoldStyle().fontSize! + 30.w,
+                    child: Stack(
+                      children: [
+                        MyText(
+                          title: appCubit.isFahrenheit
+                              ? weatherData.tempMin
+                                  .kelvinTFahrenheit()
+                                  .round()
+                                  .toString()
+                              : weatherData.temp
+                                  .kelvinToCelsius()
+                                  .round()
+                                  .toString(),
+                          style: getBoldStyle(),
+                        ),
+                        Positioned(
+                          top: 0.0,
+                          right: 0.0,
+                          child: Center(
+                            child: MyText(
+                              title:
+                                  appCubit.isFahrenheit ? '\u00B0F' : '\u00B0C',
+                              style: getRegularStyle(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ]),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: getLightStyle().fontSize! + 25.w,
+                        child: Stack(
+                          children: [
+                            MyText(
+                              title: appCubit.isFahrenheit
+                                  ? weatherData.tempMin
+                                      .kelvinTFahrenheit()
+                                      .round()
+                                      .toString()
+                                  : weatherData.tempMin
+                                      .kelvinToCelsius()
+                                      .round()
+                                      .toString(),
+                              style: getLightStyle(),
+                            ),
+                            Positioned(
+                              top: 0.0,
+                              right: 0.0,
+                              child: Center(
+                                child: MyText(
+                                  title: appCubit.isFahrenheit
+                                      ? '\u00B0F'
+                                      : '\u00B0C',
+                                  style: getLightStyle(fontSize: FontSize.s16),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      child: MyText(title: '/'),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: getLightStyle().fontSize! + 25.w,
+                        child: Stack(
+                          children: [
+                            MyText(
+                              title: appCubit.isFahrenheit
+                                  ? weatherData.tempMin
+                                      .kelvinTFahrenheit()
+                                      .round()
+                                      .toString()
+                                  : weatherData.tempMax
+                                      .kelvinToCelsius()
+                                      .round()
+                                      .toString(),
+                              style: getLightStyle(),
+                            ),
+                            Positioned(
+                              top: 0.0,
+                              right: 0.0,
+                              child: Center(
+                                child: MyText(
+                                  title: appCubit.isFahrenheit
+                                      ? '\u00B0F'
+                                      : '\u00B0C',
+                                  style: getLightStyle(fontSize: FontSize.s16),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

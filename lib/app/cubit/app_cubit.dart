@@ -46,6 +46,12 @@ class AppCubit extends Cubit<AppStates> {
   List<WeatherModel> listForcastByDaysWeather = [];
 
   int currentCity = 0;
+  bool isFahrenheit = false;
+  void changeToFahrenheit() {
+    isFahrenheit = !isFahrenheit;
+    box.write('isFahrenheit', isFahrenheit);
+    emit(ChangeToFahrenheitState());
+  }
 
 // city
   void changeCurrentCity(int index) {
@@ -131,7 +137,8 @@ class AppCubit extends Cubit<AppStates> {
     MitX.back();
   }
 
-  void loadDataCites() async {
+  void loadDataUser() async {
+    isFahrenheit = box.read('isFahrenheit') ?? false;
     if (citiesData.isEmpty) {
       emit(AppLoadAppDataState());
 
@@ -179,8 +186,8 @@ class AppCubit extends Cubit<AppStates> {
               AppErrorState(error.messages),
             ),
             (data) {
-              listForcastWeather.addAll({listWeather.length - 1: data});
-
+              listForcastWeather.addAll({0: data});
+              indexWeather = 1;
               _getListForcastByDaysWeather();
               emit(AppLoadedDataState());
             },
@@ -197,7 +204,7 @@ class AppCubit extends Cubit<AppStates> {
   Future getWeatherDataByCounty(String country,
       {bool byCityUser = false}) async {
     emit(AppLoadDataState());
-
+    currentCity = 0;
     try {
       var response = await _weatherByCountryNameUseCase
           .execute(GetWeatherByCountryNameUseCaseInput(country));

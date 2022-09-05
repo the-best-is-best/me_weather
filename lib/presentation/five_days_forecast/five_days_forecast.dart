@@ -103,8 +103,19 @@ class FiveDaysForecastView extends StatelessWidget {
                                   ),
                                 ),
                                 Builder(builder: (context) {
-                                  double minTemp =
-                                      appCubit.listForcastByDaysWeather
+                                  double minTemp = appCubit.isFahrenheit
+                                      ? appCubit.listForcastByDaysWeather
+                                          .reduce((value, element) {
+                                            if (value.temp < element.temp) {
+                                              return value;
+                                            } else {
+                                              return element;
+                                            }
+                                          })
+                                          .temp
+                                          .kelvinTFahrenheit()
+                                          .toDouble()
+                                      : appCubit.listForcastByDaysWeather
                                           .reduce((value, element) {
                                             if (value.temp < element.temp) {
                                               return value;
@@ -153,9 +164,13 @@ class FiveDaysForecastView extends StatelessWidget {
                                                                 .dateTime),
                                         yValueMapper:
                                             (WeatherModel weatherData, _) =>
-                                                weatherData.temp
-                                                    .kelvinToCelsius()
-                                                    .round(),
+                                                appCubit.isFahrenheit
+                                                    ? weatherData.temp
+                                                        .kelvinTFahrenheit()
+                                                        .round()
+                                                    : weatherData.temp
+                                                        .kelvinToCelsius()
+                                                        .round(),
                                         name: '',
                                         color: Colors.white,
                                         dataLabelSettings:

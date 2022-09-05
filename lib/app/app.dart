@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, widget) {
           return BlocProvider(
             create: (_) =>
-                AppCubit(di(), di(), di(), di(), di())..loadDataCites(),
+                AppCubit(di(), di(), di(), di(), di())..loadDataUser(),
             child: MitXMaterialApp(
               debugShowCheckedModeBanner: false,
               fallbackLocale: const Locale('en'),
