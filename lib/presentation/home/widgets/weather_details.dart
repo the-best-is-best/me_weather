@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:me_weather/app/extensions/extension_num.dart';
+import 'package:me_weather/app/resources/font_manager.dart';
 import 'package:me_weather/app/resources/routes_manager.dart';
 import 'package:mit_x/mit_x.dart';
 
@@ -69,7 +70,8 @@ class WeatherDetails extends StatelessWidget {
                                     title: appCubit.isFahrenheit
                                         ? '\u00B0F'
                                         : '\u00B0C',
-                                    style: getLightStyle(),
+                                    style:
+                                        getLightStyle(fontSize: FontSize.s14),
                                   ),
                                 ),
                               ),
@@ -104,7 +106,8 @@ class WeatherDetails extends StatelessWidget {
                                     title: appCubit.isFahrenheit
                                         ? '\u00B0F'
                                         : '\u00B0C',
-                                    style: getLightStyle(),
+                                    style:
+                                        getLightStyle(fontSize: FontSize.s14),
                                   ),
                                 ),
                               ),

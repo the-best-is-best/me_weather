@@ -10,7 +10,6 @@ import 'package:me_weather/domain/use_case/get_five_days_three_hours_forcast_dat
 import 'package:me_weather/domain/use_case/get_forcast_weather_by_country_name_use_case.dart';
 import 'package:me_weather/domain/use_case/get_weather_by_country_name_use_case.dart';
 import 'package:me_weather/domain/use_case/get_weather_data_by_location.dart';
-import 'package:me_weather/gen/assets.gen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mit_x/mit_x.dart';
 import '../../services/location_services.dart';

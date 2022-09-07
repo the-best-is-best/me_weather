@@ -62,7 +62,7 @@ class ListViewForecastWeather extends StatelessWidget {
                     child: Center(
                       child: MyText(
                         title: appCubit.isFahrenheit ? '\u00B0F' : '\u00B0C',
-                        style: getLightStyle(fontSize: FontSize.s16.sp),
+                        style: getLightStyle(fontSize: FontSize.s14),
                       ),
                     ),
                   ),

@@ -113,7 +113,9 @@ class _BuildPageState extends State<BuildPage> {
                                                                 .isFahrenheit
                                                             ? '\u00B0F'
                                                             : '\u00B0C',
-                                                        style: getMediumStyle(),
+                                                        style: getMediumStyle(
+                                                            fontSize:
+                                                                FontSize.s20),
                                                       ),
                                                     ),
                                                   ),
@@ -201,7 +203,7 @@ class _BuildPageState extends State<BuildPage> {
                                                                             : '\u00B0C',
                                                                         style: getLightStyle(
                                                                             fontSize:
-                                                                                FontSize.s16),
+                                                                                FontSize.s14),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -448,7 +450,7 @@ class CardSearch extends StatelessWidget {
                             child: MyText(
                               title:
                                   appCubit.isFahrenheit ? '\u00B0F' : '\u00B0C',
-                              style: getRegularStyle(),
+                              style: getLightStyle(fontSize: FontSize.s14),
                             ),
                           ),
                         ),
@@ -476,7 +478,7 @@ class CardSearch extends StatelessWidget {
                                       .kelvinToCelsius()
                                       .round()
                                       .toString(),
-                              style: getLightStyle(),
+                              style: getLightStyle(fontSize: FontSize.s14),
                             ),
                             Positioned(
                               top: 0.0,
@@ -486,7 +488,7 @@ class CardSearch extends StatelessWidget {
                                   title: appCubit.isFahrenheit
                                       ? '\u00B0F'
                                       : '\u00B0C',
-                                  style: getLightStyle(fontSize: FontSize.s16),
+                                  style: getLightStyle(fontSize: FontSize.s14),
                                 ),
                               ),
                             ),
@@ -527,7 +529,7 @@ class CardSearch extends StatelessWidget {
                                   title: appCubit.isFahrenheit
                                       ? '\u00B0F'
                                       : '\u00B0C',
-                                  style: getLightStyle(fontSize: FontSize.s16),
+                                  style: getLightStyle(fontSize: FontSize.s14),
                                 ),
                               ),
                             ),
